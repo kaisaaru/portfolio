@@ -1,6 +1,6 @@
 "use client";
 
-import { FiGithub, FiLinkedin, FiMail, FiHeart } from "react-icons/fi";
+import { FiGithub, FiLinkedin, FiMail, FiHeart, FiInstagram } from "react-icons/fi";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -18,13 +18,14 @@ export default function Footer() {
         {/* Social links */}
         <div className="flex items-center gap-4">
           {[
-            { icon: FiGithub, href: "https://github.com/kai", label: "GitHub" },
+            { icon: FiGithub, href: "https://github.com/kaisaaru", label: "GitHub" },
             {
               icon: FiLinkedin,
-              href: "https://linkedin.com/in/kai",
+              href: "https://linkedin.com/in/kaisaaru",
               label: "LinkedIn",
             },
-            { icon: FiMail, href: "mailto:kai@email.com", label: "Email" },
+            { icon: FiMail, href: "mailto:ryf.kaisaaru@gmail.com", label: "Email" },
+            { icon: FiInstagram, href: "https://instagram.com/ka1sai", label: "Instagram" },
           ].map(({ icon: Icon, href, label }) => (
             <a
               key={label}

@@ -10,9 +10,9 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Kai (Kaisar Rayfa) — Software Engineering Student & WebApp Developer",
+  title: "Kai (Kaisar Rayfa Al Baihaqqi) — Software Engineering Student & WebApp Developer",
   description:
-    "Personal portfolio of Kai (Kaisar Rayfa), a Software Engineering student passionate about building useful web applications that solve real problems.",
+    "Personal portfolio of Kai (Kaisar Rayfa Al Baihaqqi), a Software Engineering student passionate about building useful web applications that solve real problems.",
   keywords: [
     "portfolio",
     "software engineer",

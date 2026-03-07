@@ -1,26 +1,32 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FiMail, FiGithub, FiLinkedin, FiSend } from "react-icons/fi";
+import { FiMail, FiGithub, FiLinkedin, FiSend, FiInstagram } from "react-icons/fi";
 
 const contactInfo = [
   {
     icon: FiMail,
     label: "Email",
-    value: "kai@email.com",
-    href: "mailto:kai@email.com",
+    value: "ryf.kaisaaru@gmail.com",
+    href: "mailto:ryf.kaisaaru@gmail.com",
   },
   {
     icon: FiGithub,
     label: "GitHub",
-    value: "github.com/kai",
-    href: "https://github.com/kai",
+    value: "github.com/kaisaaru",
+    href: "https://github.com/kaisaaru",
   },
   {
     icon: FiLinkedin,
     label: "LinkedIn",
-    value: "linkedin.com/in/kai",
-    href: "https://linkedin.com/in/kai",
+    value: "linkedin.com/in/kaisaaru",
+    href: "https://linkedin.com/in/kaisaaru",
+  },
+  {
+    icon: FiInstagram,
+    label: "Instagram",
+    value: "instagram.com/ka1sai",
+    href: "https://instagram.com/ka1sai",
   },
 ];
 
@@ -142,13 +148,23 @@ export default function Contact() {
                   className="w-full px-4 py-3 rounded-xl bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all duration-200 resize-none"
                 />
               </div>
-              <button
-                type="submit"
-                className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary to-primary-dark text-white font-medium shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
-              >
-                <FiSend className="w-4 h-4" />
-                Send Message
-              </button>
+              <div className="relative group/btn">
+                <button
+                  type="button"
+                  disabled
+                  className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-muted/20 text-muted cursor-not-allowed font-medium transition-all duration-300"
+                >
+                  <FiSend className="w-4 h-4" />
+                  Send Message
+                </button>
+
+                {/* Tooltip */}
+                <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-surface-light border border-border text-foreground text-xs font-medium rounded-lg opacity-0 invisible group-hover/btn:opacity-100 group-hover/btn:visible transition-all duration-200 whitespace-nowrap shadow-xl z-20">
+                  Coming Soon
+                  {/* Tooltip Arrow */}
+                  <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-light border-b border-r border-border rotate-45" />
+                </div>
+              </div>
             </form>
           </motion.div>
         </div>

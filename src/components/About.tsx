@@ -37,7 +37,7 @@ export default function About() {
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500" />
               <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden border-2 border-border">
                 <Image
-                  src="/profile.png"
+                  src="/me/profile.jpg"
                   alt="Kai - Software Engineering Student"
                   fill
                   className="object-cover"
@@ -59,7 +59,7 @@ export default function About() {
             <p className="text-lg text-muted leading-relaxed">
               Hello! I&apos;m{" "}
               <span className="text-primary font-semibold">
-                Kaisar Rayfa
+                Kaisar Rayfa Al Baihaqqi
               </span>
               , but everyone calls me Kai. I&apos;m a Software Engineering
               student with a deep passion for building web applications that
@@ -81,7 +81,7 @@ export default function About() {
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-4 pt-4">
               {[
-                { num: "5+", label: "Projects Built" },
+                { num: "3+", label: "Projects Built" },
                 { num: "3+", label: "Tech Stacks" },
                 { num: "2+", label: "Years Learning" },
               ].map((item) => (

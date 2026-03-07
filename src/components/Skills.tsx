@@ -24,7 +24,7 @@ const skills = [
   { name: "Laravel", icon: FaLaravel, color: "#FF2D20" },
   { name: "MySQL", icon: FaDatabase, color: "#4479A1" },
   { name: "Git", icon: FaGitAlt, color: "#F05032" },
-  { name: "GitHub", icon: FaGithub, color: "#ffffff" },
+  { name: "GitHub", icon: FaGithub, color: "" },
 ];
 
 const container = {
@@ -80,12 +80,12 @@ export default function Skills() {
               className="group relative flex flex-col items-center gap-3 p-6 rounded-2xl bg-background border border-border hover:border-primary/50 transition-all duration-300 cursor-default"
             >
               <div
-                className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300"
-                style={{ backgroundColor: skill.color }}
+                className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-10 transition-opacity duration-300 ${!skill.color && "bg-foreground"}`}
+                style={skill.color ? { backgroundColor: skill.color } : {}}
               />
               <skill.icon
-                className="w-10 h-10 transition-transform duration-300 group-hover:scale-110"
-                style={{ color: skill.color }}
+                className={`w-10 h-10 transition-transform duration-300 group-hover:scale-110 ${!skill.color && "text-foreground"}`}
+                style={skill.color ? { color: skill.color } : {}}
               />
               <span className="text-sm font-medium text-foreground">
                 {skill.name}

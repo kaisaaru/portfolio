@@ -1,38 +1,73 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { FiGithub, FiExternalLink } from "react-icons/fi";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiGithub, FiExternalLink, FiChevronDown } from "react-icons/fi";
 
 const projects = [
   {
-    title: "Project Management Web App",
+    title: "Learning Management System (LMS)",
     description:
-      "A full-stack project management tool with task tracking, team collaboration, and deadline management. Supports real-time updates and role-based access control.",
+      "A web-based Learning Management System built to support digital education for schools and universities. The platform enables institutions to manage courses, students, instructors, and learning materials through an integrated dashboard.",
+    features: [
+      "User authentication and role-based access (Admin / Instructor / Student)",
+      "Course creation and management",
+      "Assignment and submission management",
+      "Learning material uploads",
+      "Student enrollment and progress tracking",
+      "Dashboard for monitoring course activity",
+      "Responsive design for desktop and mobile",
+    ],
+    tech: ["Next.js", "Node.js", "MySQL", "Tailwind CSS"],
+    github: "https://github.com/kai",
+    demo: "#",
+  },
+  {
+    title: "Project Management System (Manproy)",
+    description:
+      "A web-based project management platform developed for SUNURTECH to support project planning, financial tracking, and operational workflows.",
+    features: [
+      "Task and project progress management",
+      "Budget Planning (RAB) and Unit Price Analysis (AHS)",
+      "Material request and purchase order management",
+      "Goods receiving and inventory tracking",
+      "Fund request management",
+      "Resource monitoring and workflow coordination",
+    ],
     tech: ["Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
     github: "https://github.com/kai",
     demo: "#",
   },
   {
-    title: "Inventory Management System",
+    title: "Travel Dashboard — GDGoC Telkom Bandung",
     description:
-      "A comprehensive inventory system for tracking stock levels, purchase orders, and supplier management. Features automated reporting and low-stock alerts.",
-    tech: ["PHP", "Laravel", "MySQL", "Bootstrap"],
+      "A web-based travel management dashboard developed as part of the GDGoC Web Development program. Built collaboratively in a team environment following a Product Design Requirement (PRD).",
+    features: [
+      "Email/password authentication & Google sign-in",
+      "Admin dashboard with responsive sidebar navigation",
+      "CRUD management for destinations, packages, users & bookings",
+      "Booking quota validation",
+      "Search and pagination",
+      "Route protection based on authentication",
+      "Mobile & desktop responsive design",
+      "Light/Dark mode",
+    ],
+    tech: ["React", "Firebase", "Tailwind CSS"],
     github: "https://github.com/kai",
     demo: "#",
   },
   {
-    title: "Personal Portfolio Website",
+    title: "Financial Report Management System",
     description:
-      "A modern, responsive portfolio website built with Next.js and Tailwind CSS. Features dark mode, smooth animations, and optimized performance.",
-    tech: ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
-    github: "https://github.com/kai",
-    demo: "#",
-  },
-  {
-    title: "E-Commerce Platform",
-    description:
-      "An online marketplace with product catalog, shopping cart, payment integration, and admin dashboard for managing orders and customers.",
-    tech: ["React", "Node.js", "MySQL", "Tailwind CSS"],
+      "A web-based financial reporting system developed during my internship at KJA Kasir CA BKP to manage accounting operations and business transactions.",
+    features: [
+      "Management of purchase orders, goods receipts, and purchase invoices",
+      "Sales management including sales orders, delivery notes, and sales invoices",
+      "Financial reporting with general ledger history, balance sheets, and profit & loss statements",
+      "Inventory stock opname and cash reconciliation",
+      "Data management for purchases and sales reporting",
+    ],
+    tech: ["Laravel", "MySQL", "JavaScript", "Bootstrap"],
     github: "https://github.com/kai",
     demo: "#",
   },
@@ -52,6 +87,12 @@ const item = {
 };
 
 export default function Projects() {
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  const toggle = (title: string) => {
+    setExpanded(expanded === title ? null : title);
+  };
+
   return (
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
@@ -75,84 +116,138 @@ export default function Projects() {
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
+        {/* Projects */}
         <motion.div
           variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
-          className="grid md:grid-cols-2 gap-6"
+          className="columns-1 md:columns-2 gap-6 space-y-6"
         >
-          {projects.map((project) => (
-            <motion.div
-              key={project.title}
-              variants={item}
-              whileHover={{ y: -6 }}
-              className="group relative rounded-2xl bg-surface border border-border hover:border-primary/50 p-6 transition-all duration-300"
-            >
-              {/* Gradient border effect on hover */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+          {projects.map((project) => {
+            const isOpen = expanded === project.title;
 
-              {/* Project header */}
-              <div className="flex items-start justify-between mb-4">
-                <div className="p-3 rounded-xl bg-primary/10">
-                  <svg
-                    className="w-6 h-6 text-primary"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={1.5}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
-                    />
-                  </svg>
+            return (
+              <motion.div
+                key={project.title}
+                variants={item}
+                className="group relative rounded-2xl bg-surface border border-border hover:border-primary/50 p-6 transition-all duration-300 break-inside-avoid inline-block w-full"
+              >
+                {/* Gradient border effect on hover */}
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+
+                {/* Project header */}
+                <div className="flex items-start justify-between mb-4">
+                  <div className="p-3 rounded-xl bg-primary/10">
+                    <svg
+                      className="w-6 h-6 text-primary"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={1.5}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
+                      />
+                    </svg>
+                  </div>
+                  <div className="flex gap-3">
+                    <div className="relative group/tooltip">
+                      <div className="text-muted cursor-not-allowed flex items-center justify-center p-1">
+                        <FiGithub className="w-5 h-5 opacity-50" />
+                      </div>
+                      
+                      {/* Tooltip */}
+                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-surface-light border border-border text-foreground text-xs font-medium rounded-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 whitespace-nowrap shadow-xl z-20">
+                        Private Repository
+                        {/* Tooltip Arrow */}
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-light border-b border-r border-border rotate-45" />
+                      </div>
+                    </div>
+                    <div className="relative group/tooltip">
+                      <div className="text-muted cursor-not-allowed flex items-center justify-center p-1">
+                        <FiExternalLink className="w-5 h-5 opacity-50" />
+                      </div>
+                      
+                      {/* Tooltip */}
+                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-surface-light border border-border text-foreground text-xs font-medium rounded-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 whitespace-nowrap shadow-xl z-20">
+                        Coming Soon
+                        {/* Tooltip Arrow */}
+                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-light border-b border-r border-border rotate-45" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div className="flex gap-3">
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted hover:text-primary transition-colors duration-200"
-                    aria-label="View on GitHub"
-                  >
-                    <FiGithub className="w-5 h-5" />
-                  </a>
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted hover:text-primary transition-colors duration-200"
-                    aria-label="View demo"
-                  >
-                    <FiExternalLink className="w-5 h-5" />
-                  </a>
+
+                {/* Title & Description */}
+                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-200">
+                  {project.title}
+                </h3>
+                <p className="text-muted text-sm leading-relaxed mb-4">
+                  {project.description}
+                </p>
+
+                {/* Tech Stack Tags (always visible) */}
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20"
+                    >
+                      {t}
+                    </span>
+                  ))}
                 </div>
-              </div>
 
-              {/* Title & Description */}
-              <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-200">
-                {project.title}
-              </h3>
-              <p className="text-muted text-sm leading-relaxed mb-5">
-                {project.description}
-              </p>
+                {/* Expand/Collapse toggle */}
+                {project.features && (
+                  <div className="pt-4 mt-4 border-t border-border/50">
+                    <button
+                      onClick={() => toggle(project.title)}
+                      className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-light transition-colors duration-200 cursor-pointer"
+                    >
+                      <span>{isOpen ? "Hide Details" : "View Details"}</span>
+                      <motion.span
+                        animate={{ rotate: isOpen ? 180 : 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <FiChevronDown className="w-4 h-4" />
+                      </motion.span>
+                    </button>
 
-              {/* Tech Stack Tags */}
-              <div className="flex flex-wrap gap-2">
-                {project.tech.map((t) => (
-                  <span
-                    key={t}
-                    className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20"
-                  >
-                    {t}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
+                    {/* Collapsible features */}
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3, ease: "easeInOut" }}
+                          className="overflow-hidden"
+                        >
+                          <ul className="mt-4 pt-4 border-t border-border space-y-2">
+                            {project.features.map((feature) => (
+                              <li
+                                key={feature}
+                                className="flex items-start gap-2 text-sm text-muted"
+                              >
+                                <span className="text-primary mt-0.5 shrink-0">
+                                  ✦
+                                </span>
+                                {feature}
+                              </li>
+                            ))}
+                          </ul>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>

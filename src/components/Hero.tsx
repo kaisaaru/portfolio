@@ -100,13 +100,13 @@ export default function Hero() {
           className="flex justify-center gap-5"
         >
           {[
-            { icon: FiGithub, href: "https://github.com/kai", label: "GitHub" },
+            { icon: FiGithub, href: "https://github.com/kaisaaru", label: "GitHub" },
             {
               icon: FiLinkedin,
-              href: "https://linkedin.com/in/kai",
+              href: "https://linkedin.com/in/kaisaaru",
               label: "LinkedIn",
             },
-            { icon: FiMail, href: "mailto:kai@email.com", label: "Email" },
+            { icon: FiMail, href: "mailto:ryf.kaisaaru@gmail.com", label: "Email" },
           ].map(({ icon: Icon, href, label }) => (
             <a
               key={label}
