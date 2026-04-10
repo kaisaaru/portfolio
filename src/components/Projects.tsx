@@ -6,23 +6,6 @@ import { FiGithub, FiExternalLink, FiChevronDown } from "react-icons/fi";
 
 const projects = [
   {
-    title: "Learning Management System (LMS)",
-    description:
-      "A web-based Learning Management System built to support digital education for schools and universities. The platform enables institutions to manage courses, students, instructors, and learning materials through an integrated dashboard.",
-    features: [
-      "User authentication and role-based access (Admin / Instructor / Student)",
-      "Course creation and management",
-      "Assignment and submission management",
-      "Learning material uploads",
-      "Student enrollment and progress tracking",
-      "Dashboard for monitoring course activity",
-      "Responsive design for desktop and mobile",
-    ],
-    tech: ["Next.js", "Node.js", "MySQL", "Tailwind CSS"],
-    github: "https://github.com/kai",
-    demo: "#",
-  },
-  {
     title: "Project Management System (Manproy)",
     description:
       "A web-based project management platform developed for SUNURTECH to support project planning, financial tracking, and operational workflows.",

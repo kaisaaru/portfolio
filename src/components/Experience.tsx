@@ -4,20 +4,6 @@ import { motion } from "framer-motion";
 
 const experiences = [
   {
-    title: "Full Stack Developer (Personal Project)",
-    org: "Learning Management System (LMS)",
-    period: "Mar 2026 — Present",
-    description:
-      "Developing a Learning Management System (LMS) designed for schools and universities to support digital learning and course management.",
-    contributions: [
-      "Designing and developing a web-based LMS platform for managing courses, users, and learning materials.",
-      "Implementing role-based access control for administrators, instructors, and students.",
-      "Building features for course enrollment, assignment management, and progress tracking.",
-      "Developing a scalable backend architecture and database structure to support academic workflows.",
-    ],
-    tags: ["Next.js", "Node.js", "MySQL", "Tailwind CSS"],
-  },
-  {
     title: "Full Stack Developer (Freelance)",
     org: "SUNURTECH",
     period: "Feb 2026 — Present",
