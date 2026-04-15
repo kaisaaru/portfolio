@@ -3,10 +3,16 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiGithub, FiExternalLink, FiChevronDown } from "react-icons/fi";
+import ImageCarousel from "./ImageCarousel";
 
 const projects = [
   {
     title: "Project Management System (Manproy)",
+    images: [
+      { src: "/projects/manproy/ss1.png", alt: "Purchase Order Management" },
+      { src: "/projects/manproy/ss2.png", alt: "Purchase Order Document" },
+      { src: "/projects/manproy/ss3.png", alt: "Purchase Order Document" },
+    ],
     description:
       "A web-based project management platform developed for SUNURTECH to support project planning, financial tracking, and operational workflows.",
     features: [
@@ -17,7 +23,7 @@ const projects = [
       "Fund request management",
       "Resource monitoring and workflow coordination",
     ],
-    tech: ["Laravel", "MySQL", "JavaScript", "Tailwind CSS"],
+    tech: ["Laravel", "MySQL", "Vue"],
     github: "https://github.com/kai",
     demo: "#",
   },
@@ -35,7 +41,7 @@ const projects = [
       "Mobile & desktop responsive design",
       "Light/Dark mode",
     ],
-    tech: ["React", "Firebase", "Tailwind CSS"],
+    tech: ["React", "Firebase"],
     github: "https://github.com/kai",
     demo: "#",
   },
@@ -43,6 +49,11 @@ const projects = [
     title: "Financial Report Management System",
     description:
       "A web-based financial reporting system developed during my internship at KJA Kasir CA BKP to manage accounting operations and business transactions.",
+    images: [
+      { src: "/projects/kjakasir/ss1.png", alt: "Purchase Order Management" },
+      { src: "/projects/kjakasir/ss2.png", alt: "Purchase Order Document" },
+      { src: "/projects/kjakasir/ss3.png", alt: "Purchase Order Document" },
+    ],
     features: [
       "Management of purchase orders, goods receipts, and purchase invoices",
       "Sales management including sales orders, delivery notes, and sales invoices",
@@ -118,6 +129,11 @@ export default function Projects() {
               >
                 {/* Gradient border effect on hover */}
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+
+                {/* Screenshot Carousel */}
+                {project.images && project.images.length > 0 && (
+                  <ImageCarousel images={project.images} />
+                )}
 
                 {/* Project header */}
                 <div className="flex items-start justify-between mb-4">

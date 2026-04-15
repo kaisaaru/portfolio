@@ -81,7 +81,7 @@ export default function About() {
             {/* Quick stats */}
             <div className="grid grid-cols-3 gap-4 pt-4">
               {[
-                { num: "3+", label: "Projects Built" },
+                { num: "3", label: "Projects Built" },
                 { num: "3+", label: "Tech Stacks" },
                 { num: "2+", label: "Years Learning" },
               ].map((item) => (

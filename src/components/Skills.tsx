@@ -2,10 +2,7 @@
 
 import { motion } from "framer-motion";
 import {
-  FaHtml5,
-  FaCss3Alt,
   FaJs,
-  FaNodeJs,
   FaReact,
   FaPhp,
   FaLaravel,
@@ -13,13 +10,15 @@ import {
   FaGitAlt,
   FaGithub,
 } from "react-icons/fa";
+import { FaVuejs } from "react-icons/fa6";
+import { SiNextdotjs, SiTypescript } from "react-icons/si";
 
 const skills = [
-  { name: "HTML", icon: FaHtml5, color: "#E34F26" },
-  { name: "CSS", icon: FaCss3Alt, color: "#1572B6" },
   { name: "JavaScript", icon: FaJs, color: "#F7DF1E" },
-  { name: "Node.js", icon: FaNodeJs, color: "#339933" },
+  { name: "TypeScript", icon: SiTypescript, color: "#3178C6" },
+  { name: "NextJs", icon: SiNextdotjs, color: "#61DAFB" },
   { name: "React", icon: FaReact, color: "#61DAFB" },
+  { name: "Vue", icon: FaVuejs, color: "#4FC08D" },
   { name: "PHP", icon: FaPhp, color: "#777BB4" },
   { name: "Laravel", icon: FaLaravel, color: "#FF2D20" },
   { name: "MySQL", icon: FaDatabase, color: "#4479A1" },

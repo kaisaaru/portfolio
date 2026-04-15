@@ -6,7 +6,7 @@ const experiences = [
   {
     title: "Full Stack Developer (Freelance)",
     org: "SUNURTECH",
-    period: "Feb 2026 — Present",
+    period: "Feb 2026 — Apr 2026",
     description:
       "Developing a web-based Project Management system (Manproy) to streamline project planning and operational workflows.",
     contributions: [
