@@ -37,7 +37,7 @@ export default function About() {
               <div className="absolute -inset-1 bg-gradient-to-r from-primary to-secondary rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-500" />
               <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-2xl overflow-hidden border-2 border-border">
                 <Image
-                  src="/me/profile.jpg"
+                  src="/me/my.jpg"
                   alt="Kai - Software Engineering Student"
                   fill
                   className="object-cover"
