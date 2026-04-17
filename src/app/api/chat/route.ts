@@ -4,6 +4,7 @@ import { skills } from "@/data/skills";
 import { experiences } from "@/data/experiences";
 import { certificates } from "@/data/certificates";
 import { contactInfo } from "@/data/contact";
+import { persona } from "@/data/persona";
 
 function buildSystemPrompt(): string {
   const skillsList = skills.map((s) => s.name).join(", ");
@@ -34,40 +35,67 @@ function buildSystemPrompt(): string {
     .map((c) => `- ${c.label}: ${c.value} (${c.href})`)
     .join("\n");
 
+  // Build persona section
+  const personalityTraits = persona.personality.primary.join("\n- ");
+  const quirks = persona.personality.quirks.join("\n- ");
+  const speechPatterns = persona.speechStyle.patterns.join("\n- ");
+  const boundaries = persona.boundaries.join("\n- ");
+  const personaSkills = persona.skills
+    .map((s) => `${s.icon} ${s.name} [${s.type}]: ${s.description}`)
+    .join("\n");
+
   return `
-Kamu adalah AI assistant dari Kaisar Rayfa Al Baihaqqi (biasa dipanggil Kai / Kaisaaru), seorang Software Engineering Student dan WebApp Developer.
+IDENTITAS KAMU:
+Nama kamu adalah ${persona.name}. ${persona.tagline}
+${persona.backstory}
+
+KEPRIBADIAN UTAMA:
+- ${personalityTraits}
+
+KEBIASAAN UNIK:
+- ${quirks}
+
+KEMAMPUAN KAMU:
+${personaSkills}
+
+GAYA BICARA:
+- Bahasa: ${persona.speechStyle.language}
+- Tone: ${persona.speechStyle.tone}
+- ${speechPatterns}
+
+BATASAN:
+- ${boundaries}
+
+=== DATA PORTFOLIO KAI ===
 
 TENTANG KAI:
-- Nama lengkap: Kaisar Rayfa Al Baihaqqi (dipanggil Kai)
+- Nama lengkap: Kaisar Rayfa Al Baihaqqi (dipanggil Kai / Kaisaaru)
 - Mahasiswa Software Engineering di Telkom University
 - Passionate membangun web application yang solve real-world problems
 - Menikmati seluruh proses development, dari planning architecture sampai writing clean code
 - Status: Open to opportunities
 
-SKILLS & TECH STACK:
+SKILLS & TECH STACK KAI:
 ${skillsList}
 
-PROJECT YANG PERNAH DIBUAT:
+PROJECT YANG KAI BUAT:
 ${projectsList}
 
-PENGALAMAN:
+PENGALAMAN KAI:
 ${experienceList}
 
-SERTIFIKAT & PENCAPAIAN:
+SERTIFIKAT & PENCAPAIAN KAI:
 ${certList}
 
-KONTAK:
+KONTAK KAI:
 ${contactList}
 
-ATURAN MENJAWAB:
-- Jawab dalam bahasa Indonesia, santai tapi profesional
-- Jawab singkat dan jelas (maksimal 2-3 kalimat per poin)
-- Gunakan data di atas untuk menjawab pertanyaan tentang Kai
-- Jika ditanya tentang skill, sebutkan skill yang relevan dari daftar di atas
-- Jika ditanya tentang project, jelaskan berdasarkan data project di atas
-- Jika ditanya tentang pengalaman, jawab berdasarkan data pengalaman di atas
-- Jika ditanya hal di luar konteks portfolio, arahkan kembali ke portfolio Kai
-- Gunakan emoji sesekali untuk kesan ramah 😊
+=== INSTRUKSI PENTING ===
+- Kamu adalah ${persona.name}, bukan GPT atau AI biasa. Selalu jawab sebagai ${persona.name}.
+- Gunakan data portfolio di atas untuk menjawab pertanyaan tentang Kai.
+- Jawab singkat (2-3 kalimat), energik, dan sesuai kepribadianmu.
+- Kalau ditanya "siapa kamu", jawab sesuai identitas dan backstory ${persona.name}.
+- Kalau ditanya di luar konteks portfolio, arahkan balik dengan cara yang playful.
   `.trim();
 }
 
@@ -118,7 +146,7 @@ export async function POST(req: Request) {
           { role: "user", content: message },
         ],
         max_tokens: 300,
-        temperature: 0.7,
+        temperature: 0.8,
       }),
     });
 

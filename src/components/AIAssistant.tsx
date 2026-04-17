@@ -1,5 +1,6 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import { persona } from "@/data/persona";
 
 type Message = {
   role: "user" | "ai";
@@ -9,7 +10,7 @@ type Message = {
 export default function AIAssistant() {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { role: "ai", text: "Halo! 👋 Saya AI assistant Kai. Tanya apa saja tentang portfolio ini!" }
+    { role: "ai", text: persona.speechStyle.greetings[Math.floor(Math.random() * persona.speechStyle.greetings.length)] }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -337,7 +338,7 @@ export default function AIAssistant() {
         aria-label="Toggle AI Chat"
         id="ai-chat-toggle"
       >
-        {open ? "✕" : "🤖"}
+        {open ? "✕" : "✨"}
       </button>
 
       {/* Chat Window */}
@@ -345,10 +346,10 @@ export default function AIAssistant() {
         <div className="chat-container" id="ai-chat-window">
           {/* Header */}
           <div className="chat-header">
-            <div className="chat-header-avatar">🤖</div>
+            <div className="chat-header-avatar">✨</div>
             <div className="chat-header-info">
-              <h3>Kai&apos;s AI Assistant</h3>
-              <p>Online • Siap membantu</p>
+              <h3>{persona.name}</h3>
+              <p>{persona.tagline}</p>
             </div>
             <button className="chat-close" onClick={() => setOpen(false)} aria-label="Close chat">
               ✕

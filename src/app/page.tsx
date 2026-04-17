@@ -8,6 +8,7 @@ import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import AIAssistant from "@/components/AIAssistant";
+import VRMViewer from "@/components/VRMViewer";
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         <Certificates />
         <Contact />
         <AIAssistant />
+        <VRMViewer />
       </main>
       <Footer />
     </>
