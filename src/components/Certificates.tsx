@@ -4,21 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiX } from "react-icons/fi";
 import Image from "next/image";
-
-const certificates = [
-  {
-    title: "Finalist – Inovasi Adikara 2025",
-    issuer: "Adikara",
-    date: "2025",
-    image: "/certificates/adikara2025.png",
-  },
-  {
-    title: "Participant – Arkavidia 10.0 2026",
-    issuer: "Arkavidia",
-    date: "2026",
-    image: "/certificates/arkavidia2026.jpg",
-  },
-];
+import { certificates } from "@/data/certificates";
 
 const container = {
   hidden: { opacity: 0 },

@@ -7,6 +7,7 @@ import Experience from "@/components/Experience";
 import Certificates from "@/components/Certificates";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import AIAssistant from "@/components/AIAssistant";
 
 export default function Home() {
   return (
@@ -20,6 +21,7 @@ export default function Home() {
         <Experience />
         <Certificates />
         <Contact />
+        <AIAssistant />
       </main>
       <Footer />
     </>
