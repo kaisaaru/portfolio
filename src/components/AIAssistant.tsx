@@ -1,6 +1,7 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { persona } from "@/data/persona";
+import { speakText } from "@/lib/vrmController";
 
 type Message = {
   role: "user" | "ai";
@@ -14,8 +15,87 @@ export default function AIAssistant() {
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isListening, setIsListening] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const recognitionRef = useRef<any>(null);
+  const silenceTimerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Initialize Speech Recognition
+  useEffect(() => {
+    if (typeof window !== "undefined" && ("SpeechRecognition" in window || "webkitSpeechRecognition" in window)) {
+      const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+      recognitionRef.current = new SpeechRecognition();
+      recognitionRef.current.continuous = true;
+      recognitionRef.current.interimResults = true;
+      recognitionRef.current.lang = "ja-JP"; // Set STT to Japanese
+
+      recognitionRef.current.onresult = (event: any) => {
+        let currentTranscript = "";
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          currentTranscript += event.results[i][0].transcript;
+        }
+
+        setInput(currentTranscript);
+
+        // Reset silence timer
+        if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+        silenceTimerRef.current = setTimeout(() => {
+           // Send message after 2s of silence
+           if (currentTranscript.trim()) {
+             stopListening();
+             const msg = currentTranscript; // Capture the current transcript to send
+             setInput(""); 
+             sendMessage(msg);
+           }
+        }, 2000);
+      };
+
+      recognitionRef.current.onerror = (event: any) => {
+        console.error("Speech recognition error", event.error);
+        stopListening();
+      };
+
+      recognitionRef.current.onend = () => {
+        setIsListening(false);
+      };
+    }
+    
+    return () => {
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+      if (recognitionRef.current) recognitionRef.current.stop();
+    };
+  }, []);
+
+  const toggleListening = () => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  };
+
+  const startListening = () => {
+    if (recognitionRef.current) {
+      setInput("");
+      try {
+        recognitionRef.current.start();
+        setIsListening(true);
+      } catch (e) {
+        // Handle case where recognition is already started
+      }
+    } else {
+      alert("Browser Anda tidak mendukung Voice Recognition.");
+    }
+  };
+
+  const stopListening = () => {
+    if (recognitionRef.current) {
+      recognitionRef.current.stop();
+      setIsListening(false);
+      if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+    }
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -27,10 +107,23 @@ export default function AIAssistant() {
     }
   }, [open]);
 
-  const sendMessage = async () => {
-    if (!input.trim() || loading) return;
+  const detectEmotion = (text: string) => {
+    const lower = text.toLowerCase();
+    // Japanese + Indonesian keywords
+    if (lower.includes("maaf") || lower.includes("sedih") || lower.includes("gomen") || lower.includes("kanashi") || lower.includes("sumimasen")) return "sad";
+    if (lower.includes("marah") || lower.includes("jangan") || lower.includes("baka") || lower.includes("dame") || lower.includes("yamete") || lower.includes("okotte")) return "angry";
+    if (lower.includes("haha") || lower.includes("wkwk") || lower.includes("!") || lower.includes("senang") || lower.includes("keren") || lower.includes("sugoi") || lower.includes("yatta") || lower.includes("ureshii") || lower.includes("ehe") || lower.includes("fufu")) return "happy";
+    return "relaxed";
+  };
 
-    const userMessage = input.trim();
+  const sendMessage = async (textToSend?: string) => {
+    const text = typeof textToSend === 'string' ? textToSend : input;
+    if (!text.trim() || loading) return;
+
+    if (silenceTimerRef.current) clearTimeout(silenceTimerRef.current);
+    if (isListening) stopListening();
+
+    const userMessage = text.trim();
     setInput("");
     setMessages((prev) => [...prev, { role: "user", text: userMessage }]);
     setLoading(true);
@@ -47,13 +140,32 @@ export default function AIAssistant() {
       if (!res.ok) {
         throw new Error(data.error || "Gagal mendapatkan respons");
       }
+      let rawReply = data.reply;
+      let emotion = "neutral";
+      
+      // Extract emotion tag like [HAPPY] if present
+      const match = rawReply.match(/^\[(HAPPY|SAD|ANGRY|NEUTRAL)\]/i);
+      if (match) {
+        emotion = match[1].toLowerCase();
+        // Remove the tag from the text displayed to the user
+        rawReply = rawReply.replace(/^\[.*?\]\s*/i, "").trim();
+      } else {
+        // Fallback just in case AI doesn't send tag
+        emotion = detectEmotion(rawReply);
+      }
 
-      setMessages((prev) => [...prev, { role: "ai", text: data.reply }]);
+      setMessages((prev) => [...prev, { role: "ai", text: rawReply }]);
+      
+      // Handle VRM Speech and Emotion
+      speakText(rawReply, emotion);
+      
     } catch (error: any) {
+      const errorMsg = "Maaf, terjadi kesalahan. Coba lagi nanti ya! 🙏";
       setMessages((prev) => [
         ...prev,
-        { role: "ai", text: "Maaf, terjadi kesalahan. Coba lagi nanti ya! 🙏" },
+        { role: "ai", text: errorMsg },
       ]);
+      speakText(errorMsg, "sad");
     } finally {
       setLoading(false);
     }
@@ -321,6 +433,34 @@ export default function AIAssistant() {
           cursor: not-allowed;
         }
 
+        .chat-mic {
+          width: 40px;
+          height: 40px;
+          border-radius: 12px;
+          border: 1px solid var(--border-color);
+          background: var(--surface);
+          color: var(--foreground);
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          transition: all 0.2s;
+          flex-shrink: 0;
+        }
+
+        .chat-mic.listening {
+          background: #ef4444; /* Red color for recording */
+          color: white;
+          border-color: #ef4444;
+          animation: pulseMic 1.5s infinite;
+        }
+
+        @keyframes pulseMic {
+          0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+          70% { box-shadow: 0 0 0 10px rgba(239, 68, 68, 0); }
+          100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
         @media (max-width: 480px) {
           .chat-container {
             width: calc(100vw - 32px);
@@ -388,8 +528,28 @@ export default function AIAssistant() {
               id="ai-chat-input"
             />
             <button
+              className={`chat-mic ${isListening ? "listening" : ""}`}
+              onClick={toggleListening}
+              disabled={loading}
+              aria-label="Toggle voice input"
+              title={isListening ? "Stop listening" : "Mulai bicara"}
+            >
+              {isListening ? (
+                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                   <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                 </svg>
+              ) : (
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z" />
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2" />
+                  <line x1="12" y1="19" x2="12" y2="23" />
+                  <line x1="8" y1="23" x2="16" y2="23" />
+                </svg>
+              )}
+            </button>
+            <button
               className="chat-send"
-              onClick={sendMessage}
+              onClick={() => sendMessage()}
               disabled={loading || !input.trim()}
               aria-label="Send message"
               id="ai-chat-send"

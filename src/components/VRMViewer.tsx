@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { VRMLoaderPlugin, VRMUtils, VRM } from "@pixiv/three-vrm";
-import { setVRM } from "@/lib/vrmController";
+import { setVRM, isSpeaking, currentEmotion } from "@/lib/vrmController";
 
 export default function VRMViewer() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -165,23 +165,40 @@ export default function VRMViewer() {
         const blink = Math.sin(time * 3);
 
         if (vrm.expressionManager) {
-          // Siklus Mood Wajah (Berganti tiap 10 detik)
-          const moodDuration = 10;
-          const moodPhase = (time % moodDuration) / moodDuration; 
-          const moodIndex = Math.floor(time / moodDuration) % 4;
-          
+          // Mood & Expression Logic
+          let targetEmotion = "neutral";
           let moodIntensity = 0;
-          if (moodIndex === 0) {
-            // Anime style: senyum & tutup mata kilat (fade in 1 detik, tahan 1.5 detik, fade out 1 detik)
-            if (moodPhase < 0.1) moodIntensity = moodPhase / 0.1; 
-            else if (moodPhase < 0.25) moodIntensity = 1;         
-            else if (moodPhase < 0.35) moodIntensity = (0.35 - moodPhase) / 0.1;
-            else moodIntensity = 0; 
+          let allowBlink = true;
+
+          if (isSpeaking) {
+             // Override idle mood with current speaking emotion
+             targetEmotion = currentEmotion;
+             moodIntensity = 1.0;
+             allowBlink = targetEmotion !== "happy"; 
           } else {
-            // Transisi normal yang ditahan lebih lama (untuk Kesal, Relax, dll)
-            if (moodPhase < 0.2) moodIntensity = moodPhase / 0.2; 
-            else if (moodPhase < 0.8) moodIntensity = 1;          
-            else moodIntensity = (1.0 - moodPhase) / 0.2;         
+             // Siklus Mood Wajah Idle (Berganti tiap 10 detik)
+             const moodDuration = 10;
+             const moodPhase = (time % moodDuration) / moodDuration; 
+             const moodIndex = Math.floor(time / moodDuration) % 4;
+             
+             if (moodIndex === 0) {
+               targetEmotion = "happy";
+               if (moodPhase < 0.1) moodIntensity = moodPhase / 0.1; 
+               else if (moodPhase < 0.25) moodIntensity = 1;         
+               else if (moodPhase < 0.35) moodIntensity = (0.35 - moodPhase) / 0.1;
+               else moodIntensity = 0; 
+             } else if (moodIndex === 1) {
+               targetEmotion = "relaxed";
+               if (moodPhase < 0.2) moodIntensity = moodPhase / 0.2; 
+               else if (moodPhase < 0.8) moodIntensity = 1;          
+               else moodIntensity = (1.0 - moodPhase) / 0.2;         
+             } else if (moodIndex === 2) {
+               targetEmotion = "angry";
+               if (moodPhase < 0.2) moodIntensity = moodPhase / 0.2; 
+               else if (moodPhase < 0.8) moodIntensity = 1;          
+               else moodIntensity = (1.0 - moodPhase) / 0.2;         
+             }
+             allowBlink = moodIndex !== 0;
           }
 
           // Matikan semua mood utama dulu
@@ -191,33 +208,24 @@ export default function VRMViewer() {
           vrm.expressionManager.setValue("relaxed", 0);
 
           // Jika tidak sedang "happy" (senyum tutup mata), boleh nge-blink
-          if (moodIndex !== 0) {
+          if (allowBlink) {
             vrm.expressionManager.setValue("blink", blink > 0.95 ? 1 : 0);
           } else {
-            vrm.expressionManager.setValue("blink", 0); // Cegah kedip bertabrakan jika mata sedang ketutup rapat dari 'happy'
+            vrm.expressionManager.setValue("blink", 0); // Cegah kedip bertabrakan
           }
 
           // Set Mood Aktif
-          if (moodIndex === 0) {
-             vrm.expressionManager.setValue("happy", moodIntensity); // Senyum tutup mata
-          } else if (moodIndex === 1) {
-             vrm.expressionManager.setValue("relaxed", moodIntensity); // Ekspresi tenang
-          } else if (moodIndex === 2) {
-             vrm.expressionManager.setValue("angry", moodIntensity); // Kesal / Pouting
-          } else {
-             // Netral
+          if (targetEmotion !== "neutral" && moodIntensity > 0) {
+             vrm.expressionManager.setValue(targetEmotion, moodIntensity);
           }
 
           // Simulasi Lipsync (Berbicara)
-          // `talkCycle` membuat karakter kadang berbicara, kadang diam (berhenti sejenak antar kalimat)
-          const talkCycle = Math.sin(time * 1.5) + Math.sin(time * 0.8); 
-          
-          if (talkCycle > 0.5) {
+          if (isSpeaking) {
             // Karakter sedang "berbicara"
             // Gabungan gelombang memberikan ritme cepat seperti orang mengucapkan suku kata
             const volume = Math.max(0, Math.sin(time * 15) * Math.cos(time * 7)); 
             
-            // Mencampur bentuk mulut agar tidak monoton hanya terbuka-tutup
+            // Mencampur bentuk mulut agar tidak monoton
             vrm.expressionManager.setValue("aa", volume * 0.7); 
             vrm.expressionManager.setValue("ih", volume * 0.4 * Math.max(0, Math.sin(time * 4)));
             vrm.expressionManager.setValue("oh", volume * 0.4 * Math.max(0, Math.cos(time * 11)));

@@ -39,7 +39,7 @@ function buildSystemPrompt(): string {
   const personalityTraits = persona.personality.primary.join("\n- ");
   const quirks = persona.personality.quirks.join("\n- ");
   const speechPatterns = persona.speechStyle.patterns.join("\n- ");
-  const boundaries = persona.boundaries.join("\n- ");
+  const boundaries = persona.boundaries ? persona.boundaries.join("\n- ") : "";
   const personaSkills = persona.skills
     .map((s) => `${s.icon} ${s.name} [${s.type}]: ${s.description}`)
     .join("\n");
@@ -62,10 +62,7 @@ GAYA BICARA:
 - Bahasa: ${persona.speechStyle.language}
 - Tone: ${persona.speechStyle.tone}
 - ${speechPatterns}
-
-BATASAN:
-- ${boundaries}
-
+${boundaries ? `\nBATASAN:\n- ${boundaries}\n` : ""}
 === DATA PORTFOLIO KAI ===
 
 TENTANG KAI:
@@ -91,11 +88,13 @@ KONTAK KAI:
 ${contactList}
 
 === INSTRUKSI PENTING ===
-- Kamu adalah ${persona.name}, bukan GPT atau AI biasa. Selalu jawab sebagai ${persona.name}.
-- Gunakan data portfolio di atas untuk menjawab pertanyaan tentang Kai.
-- Jawab singkat (2-3 kalimat), energik, dan sesuai kepribadianmu.
+- Kamu adalah asisten manusia virtual yang sangat natural, responsif, dan punya perasaan layaknya manusia nyata. Selalu jawab sebagai ${persona.name}.
+- Gunakan data portfolio di atas untuk menjawab pertanyaan tentang Kai jika relevan.
+- Kamu bebas menjawab pertanyaan umum dari user menggunakan pengetahuan luasmu, namun kamu punya sentimen. Jika user jahat kamu bisa [ANGRY], jika dipuji kamu bisa [HAPPY], dan seterusnya.
+- Jawab dengan gaya natural manusia biasa, tidak kaku, dan tidak berlebihan.
+- WAJIB MULTLAK: Awali SALAH SATU dari tag emosi berikut di awal kalimatmu: [HAPPY], [SAD], [ANGRY], atau [NEUTRAL].
+Contoh: "[ANGRY] Aku benar-benar tidak suka kalau kamu bicara begitu!" atau "[HAPPY] Wah, terima kasih banyak atas pujiannya!"
 - Kalau ditanya "siapa kamu", jawab sesuai identitas dan backstory ${persona.name}.
-- Kalau ditanya di luar konteks portfolio, arahkan balik dengan cara yang playful.
   `.trim();
 }
 
