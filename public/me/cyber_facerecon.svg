@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <filter id="hud-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3.5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <linearGradient id="mesh-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#7DD3FC" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#0284C7" stop-opacity="0.85" />
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Bounding Recognition Frame -->
+  <g stroke="#38BDF8" stroke-width="1.5" fill="none" opacity="0.85">
+    <!-- Corner brackets -->
+    <path d="M 60 70 L 60 40 L 90 40" stroke-width="2.5" />
+    <path d="M 340 70 L 340 40 L 310 40" stroke-width="2.5" />
+    <path d="M 60 410 L 60 440 L 90 440" stroke-width="2.5" />
+    <path d="M 340 410 L 340 440 L 310 440" stroke-width="2.5" />
+
+    <!-- Dashed boundary box -->
+    <rect x="60" y="40" width="280" height="400" stroke-dasharray="6 8" stroke-opacity="0.35" />
+    
+    <!-- Face Target Center Crosshairs -->
+    <line x1="200" y1="20" x2="200" y2="460" stroke-dasharray="3 6" stroke-opacity="0.25" />
+    <line x1="40" y1="240" x2="360" y2="240" stroke-dasharray="3 6" stroke-opacity="0.25" />
+  </g>
+
+  <!-- Wireframe Face Mesh Geometry -->
+  <g stroke="url(#mesh-grad)" fill="none" stroke-width="1.2" filter="url(#hud-glow)">
+    <!-- Face Outline / Jawline -->
+    <polygon points="120,130 110,190 120,270 145,340 180,390 200,405 220,390 255,340 280,270 290,190 280,130 250,90 200,80 150,90" 
+             stroke-width="1.8" />
+
+    <!-- Forehead Mesh -->
+    <line x1="150" y1="90" x2="200" y2="135" />
+    <line x1="250" y1="90" x2="200" y2="135" />
+    <line x1="120" y1="130" x2="200" y2="135" />
+    <line x1="280" y1="130" x2="200" y2="135" />
+
+    <!-- Eyebrows -->
+    <polyline points="135,160 160,150 185,155" stroke-width="2" />
+    <polyline points="215,155 240,150 265,160" stroke-width="2" />
+    
+    <!-- Left Eye Polygon -->
+    <polygon points="140,185 160,175 180,185 160,195" stroke-width="1.8" />
+    <circle cx="160" cy="185" r="4.5" fill="#38BDF8" />
+    <!-- Crosshair on pupil -->
+    <line x1="152" y1="185" x2="168" y2="185" stroke="#fff" stroke-width="1" />
+    <line x1="160" y1="177" x2="160" y2="193" stroke="#fff" stroke-width="1" />
+
+    <!-- Right Eye Polygon -->
+    <polygon points="220,185 240,175 260,185 240,195" stroke-width="1.8" />
+    <circle cx="240" cy="185" r="4.5" fill="#38BDF8" />
+    <!-- Crosshair on pupil -->
+    <line x1="232" y1="185" x2="248" y2="185" stroke="#fff" stroke-width="1" />
+    <line x1="240" y1="177" x2="240" y2="193" stroke="#fff" stroke-width="1" />
+
+    <!-- Glasses Frame Silhouette (Homage to Kaisar wearing glasses!) -->
+    <rect x="130" y="165" width="60" height="38" rx="8" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" fill="rgba(56,189,248,0.06)" />
+    <rect x="210" y="165" width="60" height="38" rx="8" stroke="#38BDF8" stroke-width="2" stroke-opacity="0.8" fill="rgba(56,189,248,0.06)" />
+    <line x1="190" y1="178" x2="210" y2="178" stroke="#38BDF8" stroke-width="2.5" />
+
+    <!-- Nose Bridge & Contour -->
+    <polyline points="200,140 200,240 185,255 200,265 215,255 200,240" stroke-width="1.6" />
+    <circle cx="200" cy="265" r="3" fill="#38BDF8" />
+
+    <!-- Cheek Triangles (3D Face Mesh Wireframe) -->
+    <line x1="110" y1="190" x2="160" y2="195" />
+    <line x1="120" y1="270" x2="185" y2="255" />
+    <line x1="290" y1="190" x2="240" y2="195" />
+    <line x1="280" y1="270" x2="215" y2="255" />
+    <line x1="160" y1="195" x2="200" y2="240" />
+    <line x1="240" y1="195" x2="200" y2="240" />
+
+    <!-- Mouth Geometry -->
+    <polygon points="165,315 200,305 235,315 200,335" stroke-width="1.8" />
+    <line x1="165" y1="315" x2="235" y2="315" stroke-width="1.2" />
+    <circle cx="200" cy="305" r="2.5" fill="#38BDF8" />
+    <circle cx="200" cy="335" r="2.5" fill="#38BDF8" />
+
+    <!-- Chin / Lower Jaw Mesh -->
+    <line x1="165" y1="315" x2="180" y2="390" />
+    <line x1="235" y1="315" x2="220" y2="390" />
+    <line x1="200" y1="335" x2="200" y2="405" />
+  </g>
+
+  <!-- Landmark Coordinate Nodes (Glowing Dots) -->
+  <g fill="#FFFFFF" filter="url(#hud-glow)">
+    <circle cx="200" cy="80" r="2.5" />
+    <circle cx="150" cy="90" r="2.5" />
+    <circle cx="250" cy="90" r="2.5" />
+    <circle cx="120" cy="130" r="2.5" />
+    <circle cx="280" cy="130" r="2.5" />
+    <circle cx="110" cy="190" r="2.5" />
+    <circle cx="290" cy="190" r="2.5" />
+    <circle cx="120" cy="270" r="2.5" />
+    <circle cx="280" cy="270" r="2.5" />
+    <circle cx="145" cy="340" r="2.5" />
+    <circle cx="255" cy="340" r="2.5" />
+    <circle cx="180" cy="390" r="2.5" />
+    <circle cx="220" cy="390" r="2.5" />
+    <circle cx="200" cy="405" r="3" />
+  </g>
+
+  <!-- HUD Telemetry Text Labels -->
+  <g font-family="monospace" font-size="10" fill="#38BDF8" font-weight="bold">
+    <text x="68" y="32">AI_CV // MODEL: YOLO-FACE_v8</text>
+    <text x="68" y="55" fill="#7DD3FC" font-size="8">LANDMARKS: 68/68 TRACKED</text>
+    <text x="235" y="432" font-size="9" fill="#34D399">MATCH: 99.85%</text>
+  </g>
+</svg>
