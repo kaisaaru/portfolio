@@ -1,0 +1,20 @@
+# Kai (Kaisar Rayfa Al Baihaqqi) — Portfolio
+
+> Personal portfolio of Kaisar Rayfa Al Baihaqqi (Kai) — Software Engineering Student & Builder. Constantly learning, continuously evolving. #2030IslaNyata
+
+## About
+- [Portfolio Home](https://kaisaaru.my.id/): Main portfolio page with hero, skills, projects, experience, certificates, and contact.
+
+## Sections
+- [Hero](https://kaisaaru.my.id/#hero): Terminal-style hero with interactive CLI and biometric photo scanner.
+- [About](https://kaisaaru.my.id/#about): Background and personal introduction.
+- [Skills](https://kaisaaru.my.id/#skills): Tech stack including Laravel, Next.js, TypeScript, Python, Docker, and more.
+- [Projects](https://kaisaaru.my.id/#projects): Featured projects including Project AIRI, Medical Inventory System, and Web Portals.
+- [Experience](https://kaisaaru.my.id/#experience): Work and organizational experience timeline.
+- [Certificates](https://kaisaaru.my.id/#certificates): Professional certifications from Coursera and other platforms.
+- [Contact](https://kaisaaru.my.id/#contact): Email and social links.
+
+## Contact
+- Email: ryf.kaisaaru@gmail.com
+- GitHub: [github.com/kaisaaru](https://github.com/kaisaaru)
+- LinkedIn: [linkedin.com/in/kaisaaru](https://linkedin.com/in/kaisaaru)

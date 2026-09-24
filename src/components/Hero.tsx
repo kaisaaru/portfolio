@@ -27,17 +27,17 @@ const KATAKANA_PLATES = [
 
 export default function Hero() {
   // Terminal Expansion State: height & side elements unfold after typewriter finishes
-  const [isExpanded, setIsExpanded] = useState(true);
+  const [isExpanded, setIsExpanded] = useState(false);
 
-  // Typewriter States - Pre-populated on SSR for instant 0ms LCP & perfect SEO
-  const [cmd1Text, setCmd1Text] = useState("cat /etc/developer/profile.json && whoami");
-  const [cmd2Text, setCmd2Text] = useState('echo "#2030IslaNyata" » Making Isla Real.');
-  const [nameText, setNameText] = useState("KAISAR RAYFA AL BAIHAQQI");
-  const [roleText, setRoleText] = useState("[role] Software Engineering Student · Web Developer & Software Builder");
+  // Typewriter States (empty on SSR; sr-only span in h1 provides LCP text for bots)
+  const [cmd1Text, setCmd1Text] = useState("");
+  const [cmd2Text, setCmd2Text] = useState("");
+  const [nameText, setNameText] = useState("");
+  const [roleText, setRoleText] = useState("");
 
   // Scan States for Photo
-  const [scanProgress, setScanProgress] = useState(100);
-  const [isScanned, setIsScanned] = useState(true);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [isScanned, setIsScanned] = useState(false);
 
   // Interactive CLI States
   const [cliInput, setCliInput] = useState("");
@@ -131,6 +131,14 @@ export default function Hero() {
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (isBot) {
+      // Instantly populate without typewriter — no layout shift since we go from empty to full in one frame
+      setCmd1Text("cat /etc/developer/profile.json && whoami");
+      setCmd2Text('echo "#2030IslaNyata" \u00bb Making Isla Real.');
+      setNameText("KAISAR RAYFA AL BAIHAQQI");
+      setRoleText("[role] Software Engineering Student \u00b7 Web Developer & Software Builder");
+      setIsExpanded(true);
+      setIsScanned(true);
+      setScanProgress(100);
       return;
     }
     startTypewriter();
@@ -246,7 +254,6 @@ export default function Hero() {
 
         {/* Main Terminal Window Frame - Constant Horizontal Width, Smooth Vertical Height & Side Expansion */}
         <motion.div
-          layout
           initial={{ opacity: 0, y: 20 }}
           animate={{
             opacity: 1,
@@ -256,7 +263,6 @@ export default function Hero() {
               : "0 0 25px rgba(2, 132, 199, 0.12)",
           }}
           transition={{
-            layout: { duration: 0.55, ease: [0.16, 1, 0.3, 1] },
             opacity: { duration: 0.5 },
           }}
           className="terminal-window overflow-hidden border border-[#1E293B]"
