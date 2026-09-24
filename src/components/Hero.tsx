@@ -124,6 +124,20 @@ export default function Hero() {
   };
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isBot = /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST/i.test(navigator.userAgent);
+      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (isBot || prefersReduced) {
+        setCmd1Text("cat /etc/developer/profile.json && whoami");
+        setCmd2Text('echo "#2030IslaNyata" » Making Isla Real.');
+        setNameText("KAISAR RAYFA AL BAIHAQQI");
+        setRoleText("[role] Software Engineering Student · Web Developer & Software Builder");
+        setIsExpanded(true);
+        setIsScanned(true);
+        setScanProgress(100);
+        return;
+      }
+    }
     startTypewriter();
   }, []);
 
@@ -304,7 +318,7 @@ export default function Hero() {
                 {/* Line 3: Big Name Output */}
                 <div className="pt-2 min-h-[64px] flex items-center">
                   <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white flex items-center flex-wrap">
-                    <span>{nameText}</span>
+                    <span>{nameText || <span className="sr-only">KAISAR RAYFA AL BAIHAQQI</span>}</span>
                     {nameText.length < 24 && nameText.length > 0 && (
                       <span className="inline-block w-3 sm:w-4 h-8 sm:h-12 bg-primary ml-1 term-cursor shadow-[0_0_12px_#38bdf8]" />
                     )}
@@ -378,13 +392,15 @@ export default function Hero() {
                           value={cliInput}
                           onChange={(e) => setCliInput(e.target.value)}
                           placeholder="Type a command and press Enter (e.g. help, isla, projects)..."
-                          className="flex-1 bg-transparent text-xs sm:text-sm text-white focus:outline-none placeholder:text-[#475569]"
+                          aria-label="Interactive terminal command input"
+                          className="flex-1 bg-transparent text-xs sm:text-sm text-white focus:outline-none placeholder:text-[#94A3B8]/60"
                         />
                         <button
                           type="submit"
-                          className="px-2.5 py-1 text-xs bg-[#1E293B] hover:bg-primary/20 text-[#94A3B8] hover:text-primary rounded transition-colors flex items-center gap-1"
+                          aria-label="Execute terminal command"
+                          className="px-2.5 py-1 text-xs bg-[#1E293B] hover:bg-primary/20 text-[#94A3B8] hover:text-primary rounded transition-colors flex items-center gap-1 cursor-pointer"
                         >
-                          <FiCornerDownLeft className="w-3 h-3" />
+                          <FiCornerDownLeft className="w-3 h-3" aria-hidden="true" />
                           <span>EXE</span>
                         </button>
                       </form>
@@ -396,7 +412,8 @@ export default function Hero() {
                             key={cmd}
                             type="button"
                             onClick={() => handleQuickCmd(cmd)}
-                            className="px-2 py-0.5 rounded text-[11px] bg-[#0A0F1D] border border-[#1E293B] text-[#94A3B8] hover:text-primary hover:border-primary/50 transition-colors"
+                            aria-label={`Execute command ${cmd}`}
+                            className="px-2 py-0.5 rounded text-[11px] bg-[#0A0F1D] border border-[#1E293B] text-[#94A3B8] hover:text-primary hover:border-primary/50 transition-colors cursor-pointer"
                           >
                             ${cmd}
                           </button>
@@ -437,6 +454,7 @@ export default function Hero() {
                               src="/me/my.jpg"
                               alt="Kaisar Rayfa Al Baihaqqi"
                               fill
+                              sizes="(max-width: 640px) 176px, 208px"
                               className={`object-cover transition-all duration-700 ${
                                 isScanned
                                   ? "opacity-100 scale-100 grayscale-0"

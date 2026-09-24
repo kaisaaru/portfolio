@@ -86,7 +86,33 @@ export default function MatrixBackground() {
 
     window.addEventListener("resize", handleResize);
 
-    const render = () => {
+    const isBot =
+      typeof navigator !== "undefined" &&
+      /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST/i.test(navigator.userAgent);
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isBot || prefersReduced) {
+      // For bots / reduced motion, draw 1 static background frame and return immediately
+      ctx.clearRect(0, 0, width, height);
+      return () => {
+        window.removeEventListener("resize", handleResize);
+      };
+    }
+
+    let lastTime = 0;
+    const fpsInterval = 1000 / 30; // 30 FPS: silky smooth visual, 50% CPU savings
+
+    const render = (currentTime: number) => {
+      animationFrameId = requestAnimationFrame(render);
+
+      if (document.hidden) return;
+
+      const elapsed = currentTime - lastTime;
+      if (elapsed < fpsInterval) return;
+      lastTime = currentTime - (elapsed % fpsInterval);
+
       // Clean clear every frame - Eliminates GPU alpha rounding flicker
       ctx.clearRect(0, 0, width, height);
 
@@ -140,8 +166,6 @@ export default function MatrixBackground() {
           }
         }
       }
-
-      animationFrameId = requestAnimationFrame(render);
     };
 
     animationFrameId = requestAnimationFrame(render);

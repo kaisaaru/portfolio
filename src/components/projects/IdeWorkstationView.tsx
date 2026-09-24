@@ -347,9 +347,10 @@ export default function IdeWorkstationView({ projects }: Props) {
                           href={currentProject.github}
                           target="_blank"
                           rel="noopener noreferrer"
+                          aria-label={`Open ${currentProject.title} repository on GitHub`}
                           className="px-4 py-2 rounded-lg bg-primary hover:bg-primary-light text-[#050811] font-bold text-xs flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(56,189,248,0.25)]"
                         >
-                          <FiGithub className="w-4 h-4" />
+                          <FiGithub className="w-4 h-4" aria-hidden="true" />
                           <span>Open on GitHub</span>
                         </a>
 
@@ -358,9 +359,10 @@ export default function IdeWorkstationView({ projects }: Props) {
                             href={currentProject.demo}
                             target="_blank"
                             rel="noopener noreferrer"
+                            aria-label={`Launch live application for ${currentProject.title}`}
                             className="px-4 py-2 rounded-lg bg-[#0A0F1D] border border-primary/50 text-primary hover:bg-primary hover:text-[#050811] font-bold text-xs flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(56,189,248,0.15)]"
                           >
-                            <FiExternalLink className="w-4 h-4" />
+                            <FiExternalLink className="w-4 h-4" aria-hidden="true" />
                             <span>Launch Live Application</span>
                           </a>
                         )}

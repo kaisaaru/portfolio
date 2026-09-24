@@ -2,9 +2,18 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import dynamic from "next/dynamic";
 import { skills, SkillItem } from "@/data/skills";
 import { FiCpu, FiLayers, FiBox, FiActivity, FiTerminal } from "react-icons/fi";
-import TechSphere3D from "./TechSphere3D";
+
+const TechSphere3D = dynamic(() => import("./TechSphere3D"), {
+  ssr: false,
+  loading: () => (
+    <div className="relative w-full h-[420px] sm:h-[480px] md:h-[540px] rounded-2xl bg-[#070D1E]/70 border border-[#1E293B] shadow-[0_0_40px_rgba(56,189,248,0.08)] flex items-center justify-center font-mono">
+      <span className="text-xs text-[#94A3B8] animate-pulse">INITIALIZING_3D_CORE...</span>
+    </div>
+  ),
+});
 
 export default function Skills() {
   const [viewMode, setViewMode] = useState<"3d" | "grid">("3d");
@@ -85,11 +94,11 @@ export default function Skills() {
                     }}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0B0F19]/90 border border-[#1E293B] hover:border-primary/60 transition-all cursor-pointer group shrink-0"
                   >
-                    <Icon className="w-4 h-4 transition-transform group-hover:scale-115" style={{ color: item.color }} />
+                    <Icon aria-hidden="true" className="w-4 h-4 transition-transform group-hover:scale-115" style={{ color: item.color }} />
                     <span className="text-xs font-bold text-white group-hover:text-primary transition-colors">
                       {item.name}
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#050811] text-[#64748B] border border-[#1E293B]">
+                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#050811] text-[#94A3B8] border border-[#1E293B]">
                       {item.status}
                     </span>
                   </div>
@@ -112,11 +121,11 @@ export default function Skills() {
                     }}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0B0F19]/90 border border-[#1E293B] hover:border-primary/60 transition-all cursor-pointer group shrink-0"
                   >
-                    <Icon className="w-4 h-4 transition-transform group-hover:scale-115" style={{ color: item.color }} />
+                    <Icon aria-hidden="true" className="w-4 h-4 transition-transform group-hover:scale-115" style={{ color: item.color }} />
                     <span className="text-xs font-bold text-white group-hover:text-primary transition-colors">
                       {item.name}
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#050811] text-[#64748B] border border-[#1E293B]">
+                    <span className="text-[9px] px-1.5 py-0.2 rounded bg-[#050811] text-[#94A3B8] border border-[#1E293B]">
                       {item.status}
                     </span>
                   </div>
@@ -266,13 +275,13 @@ export default function Skills() {
                         className="w-10 h-10 rounded-lg flex items-center justify-center bg-[#050811] border border-[#1E293B] text-xl transition-transform group-hover:scale-110"
                         style={{ color: skill.color || "#38BDF8" }}
                       >
-                        <Icon />
+                        <Icon aria-hidden="true" />
                       </div>
                       <div>
                         <div className="text-sm font-bold text-white group-hover:text-primary transition-colors">
                           {skill.name}
                         </div>
-                        <div className="text-[11px] text-[#64748B]">{skill.spec}</div>
+                        <div className="text-[11px] text-[#94A3B8]">{skill.spec}</div>
                       </div>
                     </div>
 
