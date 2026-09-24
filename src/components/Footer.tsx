@@ -16,7 +16,7 @@ export default function Footer() {
               <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444] shrink-0" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B] shrink-0" />
               <span className="w-2.5 h-2.5 rounded-full bg-[#10B981] shrink-0" />
-              <span className="ml-1 sm:ml-2 text-[#64748B] text-[11px] sm:text-xs truncate">
+              <span className="ml-1 sm:ml-2 text-[#94A3B8] text-[11px] sm:text-xs truncate">
                 bash - footer.sh<span className="hidden sm:inline"> // kaisaaru@system</span>
               </span>
             </div>
@@ -82,7 +82,7 @@ export default function Footer() {
             </div>
 
             {/* Bottom Hairline & Copyright */}
-            <div className="pt-6 border-t border-[#1E293B]/60 text-[11px] text-[#64748B] flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div className="pt-6 border-t border-[#1E293B]/60 text-[11px] text-[#94A3B8] flex flex-col sm:flex-row items-center justify-between gap-2">
               <div>
                 © {currentYear} Kaisar Rayfa Al Baihaqqi. All system rights preserved.
               </div>

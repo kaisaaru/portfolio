@@ -443,7 +443,7 @@ export default function TechSphere3D({
       </div>
 
       {/* Interactive Controls Guide Tip */}
-      <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono text-[#64748B] pointer-events-none">
+      <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-[10px] font-mono text-[#94A3B8] pointer-events-none">
         <span className="hidden sm:inline">DRAG TO ROTATE 3D SPHERE · CLICK ANY NODE TO INSPECT</span>
         <span className="sm:hidden">DRAG TO ROTATE · TAP NODE</span>
         <span className="text-[#38BDF8]">

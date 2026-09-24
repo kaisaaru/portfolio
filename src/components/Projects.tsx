@@ -26,7 +26,7 @@ export default function Projects() {
               git log --featured-projects
             </h2>
           </div>
-          <div className="flex items-center gap-3 text-xs text-[#64748B]">
+          <div className="flex items-center gap-3 text-xs text-[#94A3B8]">
             <span className="flex items-center gap-1.5 text-primary">
               <FiTerminal className="w-3 h-3" />
               <span>CYBER_IDE WORKSTATION</span>

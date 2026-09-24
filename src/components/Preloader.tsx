@@ -129,7 +129,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
           <div className="absolute bottom-8 left-8 right-8 flex items-center justify-between text-[10px] sm:text-xs text-[#475569] tracking-widest uppercase">
             <div>
               <span>FRAME : </span>
-              <span className="text-[#64748B]">{String(progress * 2 + 10).padStart(4, "0")}</span>
+              <span className="text-[#94A3B8]">{String(progress * 2 + 10).padStart(4, "0")}</span>
             </div>
 
             <div>
@@ -141,7 +141,7 @@ export default function Preloader({ onComplete }: PreloaderProps) {
 
             <div>
               <span>RES : </span>
-              <span className="text-[#64748B]">{resolution}</span>
+              <span className="text-[#94A3B8]">{resolution}</span>
             </div>
           </div>
         </motion.div>

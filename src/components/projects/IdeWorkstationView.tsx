@@ -62,7 +62,7 @@ export default function IdeWorkstationView({ projects }: Props) {
             <span className="w-3 h-3 rounded-full bg-[#F59E0B]/90 inline-block shadow-[0_0_8px_rgba(245,158,11,0.5)]" />
             <span className="w-3 h-3 rounded-full bg-[#10B981]/90 inline-block shadow-[0_0_8px_rgba(16,185,129,0.5)]" />
           </div>
-          <span className="text-[#64748B] font-mono hidden sm:inline">CYBER_IDE // WORKSTATION v2.4</span>
+          <span className="text-[#94A3B8] font-mono hidden sm:inline">CYBER_IDE // WORKSTATION v2.4</span>
         </div>
 
         <div className="flex items-center gap-2 text-[11px] text-[#94A3B8]">
@@ -80,7 +80,7 @@ export default function IdeWorkstationView({ projects }: Props) {
             <FiGitBranch className="w-3 h-3" />
             <span>{currentProject.isPrivate ? "protected" : currentProject.branch}</span>
           </span>
-          <span className="text-[#64748B] hidden md:inline">
+          <span className="text-[#94A3B8] hidden md:inline">
             ({currentProject.isPrivate ? "••••••••" : currentProject.commitHash})
           </span>
         </div>
@@ -91,7 +91,7 @@ export default function IdeWorkstationView({ projects }: Props) {
         {/* Left Sidebar: Activity + File Tree Explorer */}
         <div className="lg:col-span-4 border-b lg:border-b-0 lg:border-r border-[#1E293B] bg-[#050811]/90 flex flex-col">
           {/* Explorer Header */}
-          <div className="p-3 border-b border-[#1E293B] flex items-center justify-between text-[#64748B] tracking-wider text-[11px] uppercase font-bold">
+          <div className="p-3 border-b border-[#1E293B] flex items-center justify-between text-[#94A3B8] tracking-wider text-[11px] uppercase font-bold">
             <span className="flex items-center gap-1.5">
               <FiLayers className="w-3.5 h-3.5 text-primary" />
               <span>EXPLORER : REPOSITORIES</span>
@@ -123,9 +123,9 @@ export default function IdeWorkstationView({ projects }: Props) {
                   >
                     <div className="flex items-center gap-1.5 min-w-0">
                       {isOpen ? (
-                        <FiChevronDown className="w-3.5 h-3.5 text-[#64748B] shrink-0" />
+                        <FiChevronDown className="w-3.5 h-3.5 text-[#94A3B8] shrink-0" />
                       ) : (
-                        <FiChevronRight className="w-3.5 h-3.5 text-[#64748B] shrink-0" />
+                        <FiChevronRight className="w-3.5 h-3.5 text-[#94A3B8] shrink-0" />
                       )}
                       <FiFolder className={`w-3.5 h-3.5 shrink-0 ${isCurrentProj ? "text-primary" : "text-[#F59E0B]"}`} />
                       <span className="truncate">{proj.repo}</span>
@@ -147,7 +147,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                         className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors cursor-pointer ${
                           isCurrentProj && activeTab === "readme"
                             ? "bg-primary/20 text-primary font-semibold"
-                            : "text-[#64748B] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
+                            : "text-[#94A3B8] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
                         }`}
                       >
                         <FiFileText className="w-3 h-3 text-[#38BDF8]" />
@@ -161,12 +161,12 @@ export default function IdeWorkstationView({ projects }: Props) {
                           className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors cursor-pointer ${
                             isCurrentProj && activeTab === "preview"
                               ? "bg-primary/20 text-primary font-semibold"
-                              : "text-[#64748B] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
+                              : "text-[#94A3B8] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
                           }`}
                         >
                           <FiImage className="w-3 h-3 text-[#10B981]" />
                           <span>screenshots.gui</span>
-                          <span className="text-[9px] text-[#64748B]">({proj.images.length})</span>
+                          <span className="text-[9px] text-[#94A3B8]">({proj.images.length})</span>
                         </button>
                       )}
 
@@ -176,7 +176,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                         className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors cursor-pointer ${
                           isCurrentProj && activeTab === "config"
                             ? "bg-primary/20 text-primary font-semibold"
-                            : "text-[#64748B] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
+                            : "text-[#94A3B8] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
                         }`}
                       >
                         <FiCode className="w-3 h-3 text-[#F59E0B]" />
@@ -189,7 +189,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                         className={`w-full flex items-center gap-2 px-2 py-1 rounded text-left transition-colors cursor-pointer ${
                           isCurrentProj && activeTab === "log"
                             ? "bg-primary/20 text-primary font-semibold"
-                            : "text-[#64748B] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
+                            : "text-[#94A3B8] hover:text-[#CBD5E1] hover:bg-[#0B0F19]"
                         }`}
                       >
                         <FiTerminal className="w-3 h-3 text-[#A855F7]" />
@@ -204,13 +204,13 @@ export default function IdeWorkstationView({ projects }: Props) {
 
           {/* Quick Git Info Box */}
           <div className="p-3 border-t border-[#1E293B] bg-[#0A0F1D]/80 text-[10px] space-y-1">
-            <div className="text-[#64748B] flex items-center justify-between">
+            <div className="text-[#94A3B8] flex items-center justify-between">
               <span>ACTIVE WORKSPACE:</span>
               <span className="text-primary font-bold">
                 {currentProject.isPrivate ? "[REDACTED // CLIENT_NDA]" : currentProject.repo}
               </span>
             </div>
-            <div className="text-[#64748B] flex items-center justify-between">
+            <div className="text-[#94A3B8] flex items-center justify-between">
               <span>STATUS:</span>
               <span className={currentProject.isPrivate ? "text-[#EF4444]" : "text-[#10B981]"}>
                 {currentProject.isPrivate ? "protected, encrypted" : "clean, synced"}
@@ -228,7 +228,7 @@ export default function IdeWorkstationView({ projects }: Props) {
               className={`flex items-center gap-1.5 px-3 py-2 border-b-2 text-xs transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === "readme"
                   ? "border-primary text-white bg-[#070D1E] font-bold"
-                  : "border-transparent text-[#64748B] hover:text-white"
+                  : "border-transparent text-[#94A3B8] hover:text-white"
               }`}
             >
               <FiFileText className="w-3 h-3 text-[#38BDF8]" />
@@ -241,7 +241,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                 className={`flex items-center gap-1.5 px-3 py-2 border-b-2 text-xs transition-colors cursor-pointer whitespace-nowrap ${
                   activeTab === "preview"
                     ? "border-primary text-white bg-[#070D1E] font-bold"
-                    : "border-transparent text-[#64748B] hover:text-white"
+                    : "border-transparent text-[#94A3B8] hover:text-white"
                 }`}
               >
                 <FiImage className="w-3 h-3 text-[#10B981]" />
@@ -254,7 +254,7 @@ export default function IdeWorkstationView({ projects }: Props) {
               className={`flex items-center gap-1.5 px-3 py-2 border-b-2 text-xs transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === "config"
                   ? "border-primary text-white bg-[#070D1E] font-bold"
-                  : "border-transparent text-[#64748B] hover:text-white"
+                  : "border-transparent text-[#94A3B8] hover:text-white"
               }`}
             >
               <FiCode className="w-3 h-3 text-[#F59E0B]" />
@@ -266,7 +266,7 @@ export default function IdeWorkstationView({ projects }: Props) {
               className={`flex items-center gap-1.5 px-3 py-2 border-b-2 text-xs transition-colors cursor-pointer whitespace-nowrap ${
                 activeTab === "log"
                   ? "border-primary text-white bg-[#070D1E] font-bold"
-                  : "border-transparent text-[#64748B] hover:text-white"
+                  : "border-transparent text-[#94A3B8] hover:text-white"
               }`}
             >
               <FiTerminal className="w-3 h-3 text-[#A855F7]" />
@@ -275,7 +275,7 @@ export default function IdeWorkstationView({ projects }: Props) {
           </div>
 
           {/* Breadcrumb Bar */}
-          <div className="px-4 py-1.5 text-[10px] text-[#64748B] border-b border-[#1E293B]/70 bg-[#050811]/60 flex items-center gap-1.5">
+          <div className="px-4 py-1.5 text-[10px] text-[#94A3B8] border-b border-[#1E293B]/70 bg-[#050811]/60 flex items-center gap-1.5">
             <span>workspace</span>
             <span>&gt;</span>
             <span className="text-primary">
@@ -304,7 +304,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                   className="space-y-6 max-w-3xl"
                 >
                   <div className="border-b border-[#1E293B] pb-4">
-                    <div className="text-[11px] text-[#64748B] mb-1 font-mono">
+                    <div className="text-[11px] text-[#94A3B8] mb-1 font-mono">
                       # Project Overview
                     </div>
                     <h2 className="text-2xl font-extrabold text-white tracking-tight">
@@ -382,7 +382,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                   transition={{ duration: 0.2 }}
                   className="space-y-4"
                 >
-                  <div className="flex items-center justify-between text-[11px] text-[#64748B]">
+                  <div className="flex items-center justify-between text-[11px] text-[#94A3B8]">
                     <span>GUI INTERFACE PREVIEW ({currentProject.images?.length || 0} ASSETS)</span>
                     <span className="text-primary font-mono">1080p Resolution</span>
                   </div>
@@ -391,7 +391,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                       <ImageCarousel images={currentProject.images} />
                     </div>
                   ) : (
-                    <div className="p-8 text-center text-[#64748B] border border-dashed border-[#1E293B] rounded-xl">
+                    <div className="p-8 text-center text-[#94A3B8] border border-dashed border-[#1E293B] rounded-xl">
                       No GUI preview files available for this repository.
                     </div>
                   )}
@@ -408,7 +408,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                   transition={{ duration: 0.2 }}
                   className="p-4 rounded-xl bg-[#050811] border border-[#1E293B] text-xs font-mono text-[#CBD5E1] space-y-1 overflow-x-auto leading-relaxed"
                 >
-                  <div className="text-[#64748B]">{"{"}</div>
+                  <div className="text-[#94A3B8]">{"{"}</div>
                   <div className="pl-4">
                     <span className="text-[#38BDF8]">"repository"</span>:{" "}
                     <span className={currentProject.isPrivate ? "text-[#EF4444]" : "text-[#10B981]"}>
@@ -481,7 +481,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                       </a>
                     </div>
                   )}
-                  <div className="text-[#64748B]">{"}"}</div>
+                  <div className="text-[#94A3B8]">{"}"}</div>
                 </motion.div>
               )}
 
@@ -495,7 +495,7 @@ export default function IdeWorkstationView({ projects }: Props) {
                   transition={{ duration: 0.2 }}
                   className="p-4 rounded-xl bg-[#050811] border border-[#1E293B] text-xs font-mono text-[#94A3B8] space-y-2 overflow-x-auto"
                 >
-                  <div className="text-[#64748B] flex items-center gap-2">
+                  <div className="text-[#94A3B8] flex items-center gap-2">
                     <FiPlay className="w-3 h-3 text-[#10B981]" />
                     <span>
                       $ npm run build &amp;&amp; systemctl start {currentProject.isPrivate ? "internal-service" : `${currentProject.repo}.service`}
@@ -527,8 +527,8 @@ export default function IdeWorkstationView({ projects }: Props) {
                   {currentProject.isPrivate ? "protected (••••••••)" : currentProject.branch}
                 </span>
               </span>
-              <span className="text-[#64748B] hidden sm:inline">UTF-8</span>
-              <span className="text-[#64748B] hidden sm:inline">Ln 1, Col 1</span>
+              <span className="text-[#94A3B8] hidden sm:inline">UTF-8</span>
+              <span className="text-[#94A3B8] hidden sm:inline">Ln 1, Col 1</span>
             </div>
             <div className="flex items-center gap-3">
               <span className="text-[#10B981] flex items-center gap-1">
