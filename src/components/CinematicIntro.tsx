@@ -96,7 +96,6 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
   const [isRetracting, setIsRetracting] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-  const [scanLaserPos, setScanLaserPos] = useState(0);
   const [faceVerified, setFaceVerified] = useState(false);
   const [absorbShockwave, setAbsorbShockwave] = useState(false);
 
@@ -273,58 +272,38 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
     };
   }, []);
 
-  // Main Intro Timeline Management (Runs ONCE on mount with zero restart loop)
+  // Main Intro Timeline Management
   useEffect(() => {
     const startTime = Date.now();
     const duration = 4800; // 4.8 seconds total
 
+    // Discrete event timers to minimize React re-renders
+    const t1 = setTimeout(() => setFaceVerified(true), 1300);
+    const t2 = setTimeout(() => {
+      setIsTurned(true);
+      setShowFlash(true);
+    }, 1550);
+    const t3 = setTimeout(() => setShowFlash(false), 1850);
+    const t4 = setTimeout(() => setShowPlates(true), 2400);
+    const t5 = setTimeout(() => setIsRetracting(true), 3650);
+    const t6 = setTimeout(() => setAbsorbShockwave(true), 4050);
+    const t7 = setTimeout(() => handleFinish(), 4450);
+
+    // Light progress tick for bottom telemetry bar (150ms interval instead of 30ms)
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const curProgress = Math.min((elapsed / duration) * 100, 100);
       setProgress(curProgress);
-
-      // Laser scan sweep pos
-      setScanLaserPos((elapsed % 1100) / 1100);
-
-      // Timeline Event Sequence:
-      // 0.0s - 1.3s: Face Recognition & Landmark Tracking
-      if (elapsed >= 1300) {
-        setFaceVerified(true);
-      }
-
-      // 1.55s: Flash & 3D Turn-around
-      if (elapsed >= 1550) {
-        setIsTurned(true);
-      }
-      if (elapsed >= 1550 && elapsed < 1850) {
-        setShowFlash(true);
-      } else {
-        setShowFlash(false);
-      }
-
-      // 2.4s: Katakana name plates float in
-      if (elapsed >= 2400) {
-        setShowPlates(true);
-      }
-
-      // 3.65s: Verification complete -> Lines and nodes retract back into photo
-      if (elapsed >= 3650) {
-        setIsRetracting(true);
-      }
-
-      // 4.05s: Shockwave pulse when photo absorbs all data
-      if (elapsed >= 4050) {
-        setAbsorbShockwave(true);
-      }
-
-      // 4.45s: Smooth exit directly to main site (NO LOOPING)
-      if (elapsed >= 4450) {
-        clearInterval(interval);
-        handleFinish();
-      }
-    }, 30);
+    }, 150);
 
     return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
+      clearTimeout(t4);
+      clearTimeout(t5);
+      clearTimeout(t6);
+      clearTimeout(t7);
       clearInterval(interval);
     };
   }, []);
@@ -380,7 +359,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
                   : "COMPUTER_VISION // FACE_RECOG"}
               </span>
               <span className="hidden sm:inline text-[#475569]">|</span>
-              <span className="hidden sm:inline text-[#64748B] text-[11px] truncate">
+              <span className="hidden sm:inline text-[#94A3B8] text-[11px] truncate">
                 {isRetracting
                   ? "ABSORPTION COMPLETE"
                   : isTurned
@@ -390,7 +369,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
             </div>
 
             {/* Right Telemetry Badge */}
-            <div className="flex items-center gap-1.5 text-[9px] sm:text-xs text-[#64748B] tracking-wider uppercase shrink-0">
+            <div className="flex items-center gap-1.5 text-[9px] sm:text-xs text-[#94A3B8] tracking-wider uppercase shrink-0">
               <span className="w-1.5 h-1.5 rounded-full bg-[#38BDF8]/60" />
               <span className="text-[#38BDF8]/80 font-bold hidden sm:inline">AUTOMATED_SEQUENCE</span>
               <span className="text-[#38BDF8]/80 font-bold sm:hidden">AUTO_SEQ</span>
@@ -576,13 +555,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
                         />
 
                         {/* Moving Vertical Laser Scanner Beam across face mesh */}
-                        <div
-                          className="absolute left-0 right-0 h-1.5 bg-[#38BDF8] shadow-[0_0_18px_#38BDF8,0_0_30px_#fff] pointer-events-none"
-                          style={{
-                            top: `${scanLaserPos * 100}%`,
-                            transition: "top 0.05s linear",
-                          }}
-                        >
+                        <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#38BDF8] shadow-[0_0_18px_#38BDF8,0_0_30px_#fff] pointer-events-none scanner-laser">
                           <div className="absolute inset-x-0 -top-6 h-6 bg-gradient-to-t from-[#38BDF8]/40 to-transparent pointer-events-none" />
                         </div>
                       </div>
@@ -661,13 +634,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
                       <div className="absolute inset-0 bg-[#38BDF8]/10 mix-blend-color pointer-events-none" />
 
                       {/* Moving Vertical Biometric Laser Scan Beam */}
-                      <div
-                        className="absolute left-0 right-0 h-1.5 bg-[#38BDF8] shadow-[0_0_15px_#38BDF8,0_0_30px_#fff] pointer-events-none"
-                        style={{
-                          top: `${scanLaserPos * 100}%`,
-                          transition: "top 0.05s linear",
-                        }}
-                      >
+                      <div className="absolute top-0 left-0 right-0 h-1.5 bg-[#38BDF8] shadow-[0_0_15px_#38BDF8,0_0_30px_#fff] pointer-events-none scanner-laser">
                         <div className="absolute inset-x-0 -top-6 h-6 bg-gradient-to-t from-[#38BDF8]/35 to-transparent pointer-events-none" />
                       </div>
                     </div>
@@ -827,7 +794,7 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
           {/* Bottom Telemetry & Progress Strip */}
           <div className="relative z-20 w-full px-4 py-3 sm:px-8 sm:py-4 flex flex-col gap-1.5 sm:gap-2">
-            <div className="flex items-center justify-between text-[9px] sm:text-xs text-[#64748B] tracking-wider uppercase">
+            <div className="flex items-center justify-between text-[9px] sm:text-xs text-[#94A3B8] tracking-wider uppercase">
               <span className="truncate max-w-[130px] sm:max-w-none">INITIALIZING PORTFOLIO...</span>
               <span className="hidden sm:inline">SYNCHRONIZING PROFILE STREAM</span>
               <span>{Math.round(progress)}%</span>
@@ -835,8 +802,8 @@ export default function CinematicIntro({ onComplete }: CinematicIntroProps) {
 
             {/* Neon Cyan Timeline Bar */}
             <div className="w-full h-1 bg-[#1E293B] rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#67E8F9] shadow-[0_0_10px_#38BDF8]"
+              <div
+                className="h-full bg-gradient-to-r from-[#0284C7] via-[#38BDF8] to-[#67E8F9] shadow-[0_0_10px_#38BDF8] transition-[width] duration-150 ease-out"
                 style={{ width: `${progress}%` }}
               />
             </div>

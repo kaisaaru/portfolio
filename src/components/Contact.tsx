@@ -34,7 +34,7 @@ export default function Contact() {
               ./contact_relay.sh
             </h2>
           </div>
-          <div className="text-xs text-[#64748B] flex items-center gap-2">
+          <div className="text-xs text-[#94A3B8] flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-[#10B981] shadow-[0_0_8px_#10B981] shrink-0" />
             <span>SOCKET: OPEN (DIRECT UPLINK)</span>
           </div>
@@ -78,7 +78,7 @@ export default function Contact() {
                     <info.icon className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-primary group-hover:scale-110 transition-transform" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="text-[10px] text-[#64748B] font-mono uppercase tracking-wider">
+                    <div className="text-[10px] text-[#94A3B8] font-mono uppercase tracking-wider">
                       {info.label}
                     </div>
                     <div className="text-xs sm:text-sm text-[#CBD5E1] font-semibold group-hover:text-primary transition-colors truncate">
@@ -131,7 +131,7 @@ export default function Contact() {
 
           {/* Location & Quick Direct Mailto CTA */}
           <div className="pt-4 border-t border-[#1E293B] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs text-[#64748B] flex-wrap">
+            <div className="flex items-center gap-2 text-xs text-[#94A3B8] flex-wrap">
               <FiMapPin className="w-3.5 h-3.5 text-primary shrink-0" />
               <span className="hidden sm:inline">Bandung, West Java, Indonesia · UTC+7 (WIB)</span>
               <span className="sm:hidden">Bandung, Indonesia · UTC+7 (WIB)</span>

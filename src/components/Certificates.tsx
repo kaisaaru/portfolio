@@ -45,7 +45,7 @@ export default function Certificates() {
               gpg --verify-credentials
             </h2>
           </div>
-          <div className="text-xs text-[#64748B] flex items-center gap-2">
+          <div className="text-xs text-[#94A3B8] flex items-center gap-2">
             <FiCheckCircle className="text-accent w-3 h-3" />
             <span>ALL {certificates.length} SIGNATURES VALID</span>
           </div>
@@ -108,7 +108,7 @@ export default function Certificates() {
                     <div>
                       ISSUER: <strong className="text-secondary font-semibold">{cert.issuer}</strong>
                     </div>
-                    <div className="text-[#64748B]">DATE: {cert.date}</div>
+                    <div className="text-[#94A3B8]">DATE: {cert.date}</div>
                   </div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function Certificates() {
                     <FiExternalLink className="w-3.5 h-3.5" />
                     <span>Verify Credential</span>
                   </a>
-                  <span className="text-[10px] text-[#64748B]">coursera.org</span>
+                  <span className="text-[10px] text-[#94A3B8]">coursera.org</span>
                 </div>
               )}
             </motion.div>

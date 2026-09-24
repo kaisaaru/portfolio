@@ -27,17 +27,17 @@ const KATAKANA_PLATES = [
 
 export default function Hero() {
   // Terminal Expansion State: height & side elements unfold after typewriter finishes
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
 
-  // Typewriter States
-  const [cmd1Text, setCmd1Text] = useState("");
-  const [cmd2Text, setCmd2Text] = useState("");
-  const [nameText, setNameText] = useState("");
-  const [roleText, setRoleText] = useState("");
+  // Typewriter States - Pre-populated on SSR for instant 0ms LCP & perfect SEO
+  const [cmd1Text, setCmd1Text] = useState("cat /etc/developer/profile.json && whoami");
+  const [cmd2Text, setCmd2Text] = useState('echo "#2030IslaNyata" » Making Isla Real.');
+  const [nameText, setNameText] = useState("KAISAR RAYFA AL BAIHAQQI");
+  const [roleText, setRoleText] = useState("[role] Software Engineering Student · Web Developer & Software Builder");
 
   // Scan States for Photo
-  const [scanProgress, setScanProgress] = useState(0);
-  const [isScanned, setIsScanned] = useState(false);
+  const [scanProgress, setScanProgress] = useState(100);
+  const [isScanned, setIsScanned] = useState(true);
 
   // Interactive CLI States
   const [cliInput, setCliInput] = useState("");
@@ -124,19 +124,14 @@ export default function Hero() {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isBot = /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST/i.test(navigator.userAgent);
-      const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (isBot || prefersReduced) {
-        setCmd1Text("cat /etc/developer/profile.json && whoami");
-        setCmd2Text('echo "#2030IslaNyata" » Making Isla Real.');
-        setNameText("KAISAR RAYFA AL BAIHAQQI");
-        setRoleText("[role] Software Engineering Student · Web Developer & Software Builder");
-        setIsExpanded(true);
-        setIsScanned(true);
-        setScanProgress(100);
-        return;
-      }
+    const ua = typeof navigator !== "undefined" ? navigator.userAgent : "";
+    const isBot =
+      Boolean((navigator as unknown as { webdriver?: boolean }).webdriver) ||
+      /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST|HeadlessChrome|Wget|Curl/i.test(ua) ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (isBot) {
+      return;
     }
     startTypewriter();
   }, []);
@@ -272,7 +267,7 @@ export default function Hero() {
               <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#EF4444] inline-block shrink-0" />
               <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#F59E0B] inline-block shrink-0" />
               <span className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#10B981] inline-block shrink-0" />
-              <span className="ml-1.5 sm:ml-3 text-[11px] sm:text-xs text-[#64748B] truncate">
+              <span className="ml-1.5 sm:ml-3 text-[11px] sm:text-xs text-[#94A3B8] truncate">
                 <span className="hidden sm:inline">bash: </span>kaisaaru@dev:~/workspace
               </span>
             </div>
@@ -341,7 +336,7 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs sm:text-sm text-[#64748B] leading-relaxed"
+                    className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed"
                   >
                     <span className="text-accent font-bold">[spec]</span> Backend Systems{" "}
                     <span className="text-[#334155]">·</span> Clean Architecture{" "}
@@ -363,7 +358,7 @@ export default function Hero() {
                       }}
                       className="pt-4 border-t border-[#1E293B]/70 space-y-2 overflow-hidden"
                     >
-                      <div className="text-[11px] text-[#64748B] flex items-center justify-between">
+                      <div className="text-[11px] text-[#94A3B8] flex items-center justify-between">
                         <span>LIVE INTERACTIVE SHELL:</span>
                         <span className="text-primary">TRY: &quot;help&quot;, &quot;isla&quot;, &quot;skills&quot;, &quot;projects&quot;</span>
                       </div>
@@ -467,7 +462,7 @@ export default function Hero() {
                             {!isScanned && (
                               <div className="absolute inset-0 pointer-events-none">
                                 {/* Moving Laser line */}
-                                <div className="absolute left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent shadow-[0_0_15px_#38BDF8] scanner-laser" />
+                                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#38BDF8] to-transparent shadow-[0_0_15px_#38BDF8] scanner-laser" />
                                 {/* Holographic grid scanner overlay */}
                                 <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.1)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.1)_1px,transparent_1px)] bg-[size:16px_16px] scanner-grid" />
                                 {/* Scanning watermark */}

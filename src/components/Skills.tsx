@@ -71,7 +71,7 @@ export default function Skills() {
               </button>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 text-xs text-[#64748B]">
+            <div className="hidden sm:flex items-center gap-2 text-xs text-[#94A3B8]">
               <span className="w-2 h-2 rounded-full bg-[#10B981] shadow-[0_0_8px_#10B981]" />
               <span>17 PACKAGES ACTIVE</span>
             </div>
@@ -190,24 +190,24 @@ export default function Skills() {
                       {/* Specs and details */}
                       <div className="space-y-3 pt-3">
                         <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] space-y-1">
-                          <div className="text-[10px] text-[#64748B] uppercase">SPECIFICATION</div>
+                          <div className="text-[10px] text-[#94A3B8] uppercase">SPECIFICATION</div>
                           <div className="text-xs text-[#CBD5E1] font-semibold">
                             {selectedSkill.spec}
                           </div>
                         </div>
 
                         <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] space-y-1">
-                          <div className="text-[10px] text-[#64748B] uppercase">RUNTIME STATUS</div>
+                          <div className="text-[10px] text-[#94A3B8] uppercase">RUNTIME STATUS</div>
                           <div className="flex items-center justify-between text-xs">
                             <span className="text-[#34D399] font-bold">
                               ✓ {selectedSkill.status}
                             </span>
-                            <span className="text-[#64748B]">LATENCY: &lt;1ms</span>
+                            <span className="text-[#94A3B8]">LATENCY: &lt;1ms</span>
                           </div>
                         </div>
 
                         <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] space-y-1 font-mono">
-                          <div className="text-[10px] text-[#64748B] uppercase">COMMAND EXEC</div>
+                          <div className="text-[10px] text-[#94A3B8] uppercase">COMMAND EXEC</div>
                           <div className="text-xs text-primary truncate">
                             $ which {selectedSkill.name.toLowerCase().replace(/[^a-z0-9]/g, "")}
                           </div>
@@ -216,7 +216,7 @@ export default function Skills() {
 
                       {/* Quick Node Selector Pills */}
                       <div className="pt-2">
-                        <div className="text-[10px] text-[#64748B] mb-2 uppercase flex items-center gap-1.5">
+                        <div className="text-[10px] text-[#94A3B8] mb-2 uppercase flex items-center gap-1.5">
                           <FiActivity className="w-3 h-3 text-primary" />
                           <span>QUICK SELECT:</span>
                         </div>
@@ -240,7 +240,7 @@ export default function Skills() {
                   )}
                 </div>
 
-                <div className="pt-4 border-t border-[#1E293B] flex items-center justify-between text-[11px] text-[#64748B]">
+                <div className="pt-4 border-t border-[#1E293B] flex items-center justify-between text-[11px] text-[#94A3B8]">
                   <span>HOLOGRAPHIC_ORBIT</span>
                   <span className="text-primary font-mono">[CLICK 3D TO INSPECT]</span>
                 </div>
@@ -298,7 +298,7 @@ export default function Skills() {
                     </span>
                   </div>
 
-                  <div className="mt-4 pt-3 border-t border-[#1E293B]/60 flex items-center justify-between text-[10px] text-[#64748B]">
+                  <div className="mt-4 pt-3 border-t border-[#1E293B]/60 flex items-center justify-between text-[10px] text-[#94A3B8]">
                     <span>STATUS: 200_OK</span>
                     <span className="text-primary font-medium">[INSPECT IN 3D]</span>
                   </div>

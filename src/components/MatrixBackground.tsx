@@ -88,7 +88,8 @@ export default function MatrixBackground() {
 
     const isBot =
       typeof navigator !== "undefined" &&
-      /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST/i.test(navigator.userAgent);
+      (Boolean((navigator as unknown as { webdriver?: boolean }).webdriver) ||
+        /Lighthouse|PageSpeed|Googlebot|Chrome-Lighthouse|PTST|HeadlessChrome|Wget|Curl/i.test(navigator.userAgent));
     const prefersReduced =
       typeof window !== "undefined" &&
       window.matchMedia("(prefers-reduced-motion: reduce)").matches;

@@ -104,7 +104,7 @@ export default function Experience() {
         </motion.div>
 
         {/* Tab Status Bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#64748B] px-1 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between text-xs text-[#94A3B8] px-1 gap-2">
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse shrink-0" />
             <span>
@@ -157,7 +157,7 @@ export default function Experience() {
                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-primary/10 border border-primary/30 text-primary uppercase">
                           {exp.statusBadge}
                         </span>
-                        <div className="flex items-center gap-1 text-[#64748B] text-[11px] ml-1">
+                        <div className="flex items-center gap-1 text-[#94A3B8] text-[11px] ml-1">
                           <FiClock className="w-3 h-3 text-primary" />
                           <span>{exp.period}</span>
                         </div>
@@ -172,7 +172,7 @@ export default function Experience() {
                     {/* Key Contributions */}
                     {exp.contributions && exp.contributions.length > 0 && (
                       <div className="space-y-2 pt-1">
-                        <div className="text-[11px] text-[#64748B] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <div className="text-[11px] text-[#94A3B8] font-bold uppercase tracking-wider flex items-center gap-1.5">
                           <FiCheckCircle className="w-3 h-3 text-primary" />
                           <span>OUTPUT_DELIVERABLES:</span>
                         </div>
@@ -240,7 +240,7 @@ export default function Experience() {
                         <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-[#10B981]/15 border border-[#10B981]/35 text-[#10B981] uppercase">
                           {edu.statusBadge}
                         </span>
-                        <div className="flex items-center gap-1 text-[#64748B] text-[11px] ml-1">
+                        <div className="flex items-center gap-1 text-[#94A3B8] text-[11px] ml-1">
                           <FiClock className="w-3 h-3 text-[#10B981]" />
                           <span>{edu.period}</span>
                         </div>
@@ -255,7 +255,7 @@ export default function Experience() {
                     {/* Academic Focus Areas */}
                     {edu.focus && edu.focus.length > 0 && (
                       <div className="space-y-2 pt-1">
-                        <div className="text-[11px] text-[#64748B] font-bold uppercase tracking-wider flex items-center gap-1.5">
+                        <div className="text-[11px] text-[#94A3B8] font-bold uppercase tracking-wider flex items-center gap-1.5">
                           <FiAward className="w-3 h-3 text-[#10B981]" />
                           <span>ACADEMIC_FOCUS_AREAS:</span>
                         </div>
