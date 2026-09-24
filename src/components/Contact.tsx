@@ -94,20 +94,22 @@ export default function Contact() {
                         type="button"
                         onClick={handleCopyEmail}
                         title="Copy email address"
+                        aria-label="Copy email address to clipboard"
                         className="p-2 rounded-lg bg-[#0A0F1D] border border-[#1E293B] hover:border-primary/50 text-[#94A3B8] hover:text-white transition-colors cursor-pointer"
                       >
                         {copied ? (
-                          <FiCheck className="w-3.5 h-3.5 text-[#10B981]" />
+                          <FiCheck className="w-3.5 h-3.5 text-[#10B981]" aria-hidden="true" />
                         ) : (
-                          <FiCopy className="w-3.5 h-3.5" />
+                          <FiCopy className="w-3.5 h-3.5" aria-hidden="true" />
                         )}
                       </button>
                       <a
                         href={info.href}
                         title="Send email"
+                        aria-label="Send direct email"
                         className="p-2 rounded-lg bg-[#0A0F1D] border border-[#1E293B] hover:border-primary/50 text-[#94A3B8] hover:text-primary transition-colors"
                       >
-                        <FiExternalLink className="w-3.5 h-3.5" />
+                        <FiExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                       </a>
                     </>
                   ) : (
@@ -115,9 +117,11 @@ export default function Contact() {
                       href={info.href}
                       target="_blank"
                       rel="noopener noreferrer"
+                      title={`Visit ${info.label}`}
+                      aria-label={`Open external link to ${info.label}: ${info.value}`}
                       className="p-2 rounded-lg bg-[#0A0F1D] border border-[#1E293B] hover:border-primary/50 text-[#94A3B8] group-hover:text-primary transition-colors"
                     >
-                      <FiExternalLink className="w-3.5 h-3.5" />
+                      <FiExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
                     </a>
                   )}
                 </div>

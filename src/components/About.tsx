@@ -25,7 +25,7 @@ export default function About() {
               cat ./about.me
             </h2>
           </div>
-          <div className="text-xs text-[#64748B]">
+          <div className="text-xs text-[#94A3B8]">
             FILE_SIZE: 4.2KB · PERMISSION: -rwxr-xr--
           </div>
         </motion.div>
@@ -56,11 +56,11 @@ export default function About() {
                   <span>about.me <span className="text-[10px] text-primary">[OPEN]</span></span>
                 </li>
                 <li className="pl-4 flex items-center gap-2">
-                  <FiFileText className="w-3.5 h-3.5 text-[#64748B]" />
+                  <FiFileText className="w-3.5 h-3.5 text-[#94A3B8]" />
                   <span>tech_stack.json</span>
                 </li>
                 <li className="pl-4 flex items-center gap-2">
-                  <FiFileText className="w-3.5 h-3.5 text-[#64748B]" />
+                  <FiFileText className="w-3.5 h-3.5 text-[#94A3B8]" />
                   <span>projects_manifest.yaml</span>
                 </li>
                 <li className="pl-4 flex items-center gap-2 text-accent-pink font-semibold">
@@ -153,12 +153,12 @@ export default function About() {
                 <div className="text-xs text-[#94A3B8]">
                   <span className="text-primary font-semibold">#2030IslaNyata</span>{" "}
                   <span className="text-[#334155]">·</span>{" "}
-                  <span className="text-[#64748B]">One idea, one project, and one step at a time.</span>
+                  <span className="text-[#94A3B8]">One idea, one project, and one step at a time.</span>
                 </div>
               </div>
 
               {/* Concluding Note */}
-              <p className="text-xs sm:text-sm text-[#64748B] italic">
+              <p className="text-xs sm:text-sm text-[#94A3B8] italic">
                 &ldquo;Maybe it&apos;s an ambitious goal. Maybe it&apos;ll take longer than I expect.
                 But for now, I&apos;ll keep building, one idea, one project, and one step at a time.&rdquo;
               </p>
@@ -167,19 +167,19 @@ export default function About() {
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-[#1E293B]">
                 <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] text-center">
                   <div className="text-xl font-bold text-primary">3+</div>
-                  <div className="text-[10px] text-[#64748B] uppercase mt-0.5">Projects Shipped</div>
+                  <div className="text-[10px] text-[#94A3B8] uppercase mt-0.5">Projects Shipped</div>
                 </div>
                 <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] text-center">
                   <div className="text-xl font-bold text-secondary">3+</div>
-                  <div className="text-[10px] text-[#64748B] uppercase mt-0.5">Core Stacks</div>
+                  <div className="text-[10px] text-[#94A3B8] uppercase mt-0.5">Core Stacks</div>
                 </div>
                 <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] text-center">
                   <div className="text-xl font-bold text-accent">2+</div>
-                  <div className="text-[10px] text-[#64748B] uppercase mt-0.5">Years Learning</div>
+                  <div className="text-[10px] text-[#94A3B8] uppercase mt-0.5">Years Learning</div>
                 </div>
                 <div className="p-3 rounded-lg bg-[#050811] border border-[#1E293B] text-center">
                   <div className="text-xl font-bold text-accent-pink">2030</div>
-                  <div className="text-[10px] text-[#64748B] uppercase mt-0.5">Vision Target</div>
+                  <div className="text-[10px] text-[#94A3B8] uppercase mt-0.5">Vision Target</div>
                 </div>
               </div>
             </div>
