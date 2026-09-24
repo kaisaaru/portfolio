@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="100%" height="100%">
+  <defs>
+    <filter id="cyan-glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="4" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <linearGradient id="finger-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" />
+      <stop offset="50%" stop-color="#7DD3FC" />
+      <stop offset="100%" stop-color="#0284C7" />
+    </linearGradient>
+  </defs>
+
+  <g stroke="url(#finger-grad)" stroke-linecap="round" stroke-linejoin="round" fill="none" filter="url(#cyan-glow)">
+    <!-- Core Inner Whorls -->
+    <path d="M 200 240 C 200 220 215 210 215 235 C 215 255 195 265 190 280 C 185 295 195 315 205 320" stroke-width="4.5" />
+    <path d="M 190 230 C 190 210 205 195 225 210 C 235 220 230 245 220 260 C 210 275 200 295 205 330" stroke-width="4.2" />
+    <path d="M 180 245 C 180 200 220 185 235 205 C 245 220 245 245 235 270 C 225 290 215 315 220 345" stroke-width="4.2" />
+
+    <!-- Middle Loops -->
+    <path d="M 170 235 C 165 190 210 170 245 185 C 260 195 260 225 250 255 C 240 285 230 315 235 360" stroke-width="4" />
+    <path d="M 160 250 C 150 195 200 155 255 170 C 275 180 275 215 265 250 C 255 285 245 320 250 375" stroke-width="4" />
+    <path d="M 150 240 C 140 180 205 140 265 155 C 290 165 290 205 280 245 C 270 285 260 325 265 390" stroke-width="3.8" />
+    
+    <!-- Outer Arch Ridges -->
+    <path d="M 140 260 C 130 180 195 125 275 140 C 305 150 305 195 295 240 C 285 285 275 335 280 405" stroke-width="3.8" />
+    <path d="M 130 250 C 120 165 195 110 285 125 C 320 135 320 185 310 235 C 300 285 290 345 295 420" stroke-width="3.5" />
+    <path d="M 120 270 C 110 165 190 95 295 110 C 335 120 335 175 325 230 C 315 285 305 355 310 435" stroke-width="3.5" />
+
+    <!-- Top Cap Arches -->
+    <path d="M 135 180 C 145 120 215 80 285 95 C 325 105 345 145 340 195" stroke-width="3.2" stroke-dasharray="28 8" />
+    <path d="M 155 140 C 180 95 245 70 300 85 C 335 95 350 125 350 165" stroke-width="3" stroke-dasharray="35 10" />
+    <path d="M 180 105 C 215 75 265 65 310 80" stroke-width="3" />
+
+    <!-- Lower Delta & Lateral Ridges -->
+    <path d="M 115 300 C 110 230 145 180 160 170" stroke-width="3.2" />
+    <path d="M 105 330 C 100 265 130 215 145 205" stroke-width="3.2" />
+    <path d="M 100 370 C 95 315 115 265 130 250" stroke-width="3.2" />
+    <path d="M 95 410 C 90 365 105 320 115 305" stroke-width="3" stroke-dasharray="16 6" />
+
+    <path d="M 335 270 C 345 315 340 370 335 425" stroke-width="3.2" />
+    <path d="M 345 230 C 360 280 355 345 350 410" stroke-width="3" stroke-dasharray="20 8" />
+    <path d="M 355 190 C 370 240 370 310 365 380" stroke-width="2.8" />
+  </g>
+
+  <!-- Biometric Analysis Nodes / Minutiae Points -->
+  <g fill="#38BDF8">
+    <circle cx="200" cy="240" r="3.5" />
+    <circle cx="225" cy="210" r="3.5" />
+    <circle cx="235" cy="270" r="3.5" />
+    <circle cx="255" cy="170" r="3.5" />
+    <circle cx="160" cy="250" r="3.5" />
+    <circle cx="280" cy="245" r="3.5" />
+  </g>
+  <g stroke="#38BDF8" stroke-width="1.2" stroke-dasharray="3 3">
+    <line x1="200" y1="240" x2="225" y2="210" opacity="0.6" />
+    <line x1="225" y1="210" x2="255" y2="170" opacity="0.6" />
+    <line x1="200" y1="240" x2="235" y2="270" opacity="0.6" />
+    <line x1="235" y1="270" x2="280" y2="245" opacity="0.6" />
+  </g>
+</svg>

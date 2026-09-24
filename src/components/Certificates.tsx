@@ -2,34 +2,19 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiX } from "react-icons/fi";
+import { FiX, FiAward, FiCheckCircle, FiMaximize2, FiExternalLink } from "react-icons/fi";
 import Image from "next/image";
 import { certificates } from "@/data/certificates";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.1 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
-};
 
 export default function Certificates() {
   const [selectedCert, setSelectedCert] = useState<string | null>(null);
 
-  // Handle escape key to close modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") setSelectedCert(null);
     };
     if (selectedCert) {
       window.addEventListener("keydown", handleKeyDown);
-      // Prevent scrolling when modal is open
       document.body.style.overflow = "hidden";
     }
     return () => {
@@ -41,111 +26,171 @@ export default function Certificates() {
   const activeCert = certificates.find((c) => c.image === selectedCert);
 
   return (
-    <section id="certificates" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="certificates" className="py-24 px-4 sm:px-6 font-mono relative">
+      <div className="max-w-6xl mx-auto space-y-12">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#1E293B] pb-4 gap-2"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Certificates
-            </span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4" />
-          <p className="text-muted max-w-lg mx-auto">
-            Achievements and recognitions in the tech field.
-          </p>
+          <div>
+            <div className="text-xs text-primary flex items-center gap-1.5 mb-1">
+              <FiAward className="w-3.5 h-3.5" />
+              <span>KEYRING_REGISTRY // VERIFIED CREDENTIALS</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
+              gpg --verify-credentials
+            </h2>
+          </div>
+          <div className="text-xs text-[#64748B] flex items-center gap-2">
+            <FiCheckCircle className="text-accent w-3 h-3" />
+            <span>ALL {certificates.length} SIGNATURES VALID</span>
+          </div>
         </motion.div>
 
-        {/* Certificates Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
-        >
-          {certificates.map((cert) => (
+        {/* Certificate Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {certificates.map((cert, index) => (
             <motion.div
               key={cert.title}
-              variants={item}
-              whileHover={{ y: -4 }}
-              onClick={() => setSelectedCert(cert.image)}
-              className="group cursor-pointer rounded-2xl bg-surface border border-border hover:border-primary/50 overflow-hidden transition-all duration-300 flex flex-col h-full"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
+              className="terminal-window rounded-xl overflow-hidden border border-[#1E293B] group hover:border-primary/50 transition-all duration-300 flex flex-col justify-between"
             >
-              <div className="relative w-full aspect-[4/3] bg-background">
-                <Image
-                  src={cert.image}
-                  alt={cert.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                />
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                  <span className="text-white font-medium bg-black/50 px-4 py-2 rounded-full text-sm">
-                    Click to view
+              <div>
+                {/* Terminal Titlebar */}
+                <div className="bg-[#0A0F1D] px-4 py-2.5 border-b border-[#1E293B] flex items-center justify-between text-xs">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#EF4444]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#F59E0B]" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#10B981]" />
+                    <span className="ml-2 text-[#94A3B8] font-bold text-[11px]">
+                      cert_{index + 1}.sha256
+                    </span>
+                  </div>
+                  <span className="text-[10px] text-accent uppercase font-bold">
+                    [VERIFIED]
                   </span>
                 </div>
-              </div>
-              <div className="p-5 mt-auto border-t border-border">
-                <h3 className="text-base font-bold text-foreground group-hover:text-primary transition-colors duration-200 mb-1">
-                  {cert.title}
-                </h3>
-                <div className="flex items-center justify-between text-muted text-sm mt-3">
-                  <span>{cert.issuer}</span>
-                  <span className="text-primary/70 font-medium">{cert.date}</span>
+
+                {/* Certificate Image Preview */}
+                <div
+                  onClick={() => setSelectedCert(cert.image)}
+                  className="relative h-56 w-full bg-[#050811] cursor-pointer overflow-hidden group/img"
+                >
+                  <Image
+                    src={cert.image}
+                    alt={cert.title}
+                    fill
+                    className="object-cover group-hover/img:scale-105 transition-transform duration-500 opacity-90 group-hover/img:opacity-100"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F19] via-transparent to-transparent opacity-80" />
+
+                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/img:opacity-100 transition-opacity bg-black/50 backdrop-blur-xs">
+                    <div className="px-3 py-1.5 rounded-lg bg-[#0B0F19] border border-primary text-primary text-xs flex items-center gap-1.5">
+                      <FiMaximize2 className="w-3.5 h-3.5" />
+                      <span>View Inspection Frame</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Certificate Details */}
+                <div className="p-5 space-y-2">
+                  <h3 className="text-sm font-bold text-white group-hover:text-primary transition-colors leading-snug">
+                    {cert.title}
+                  </h3>
+                  <div className="text-xs text-[#94A3B8] space-y-1">
+                    <div>
+                      ISSUER: <strong className="text-secondary font-semibold">{cert.issuer}</strong>
+                    </div>
+                    <div className="text-[#64748B]">DATE: {cert.date}</div>
+                  </div>
                 </div>
               </div>
+
+              {/* Card Action Link */}
+              {cert.verifyUrl && (
+                <div className="px-5 py-3 border-t border-[#1E293B]/70 bg-[#0A0F1D]/50 flex items-center justify-between text-xs">
+                  <a
+                    href={cert.verifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-white flex items-center gap-1.5 transition-colors font-mono"
+                  >
+                    <FiExternalLink className="w-3.5 h-3.5" />
+                    <span>Verify Credential</span>
+                  </a>
+                  <span className="text-[10px] text-[#64748B]">coursera.org</span>
+                </div>
+              )}
             </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
 
-      {/* Fullscreen Lightbox Modal */}
+      {/* Terminal Modal Document Viewer */}
       <AnimatePresence>
         {selectedCert && activeCert && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
             onClick={() => setSelectedCert(null)}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4 sm:p-6"
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md"
           >
-            {/* Close button */}
-            <button
-              onClick={() => setSelectedCert(null)}
-              className="absolute top-4 right-4 sm:top-6 sm:right-6 text-white/70 hover:text-white bg-black/50 hover:bg-black/80 rounded-full p-2 transition-all p-3 z-50"
-              aria-label="Close modal"
-            >
-              <FiX className="w-6 h-6" />
-            </button>
-
-            {/* Image container */}
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-5xl max-h-[85vh] aspect-auto bg-black rounded-lg overflow-hidden shadow-2xl flex items-center justify-center cursor-default"
-              onClick={(e) => e.stopPropagation()} // Prevent clicking image from closing
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-4xl w-full terminal-window rounded-xl overflow-hidden border border-[#38BDF8]/60 shadow-[0_0_50px_rgba(56,189,248,0.2)]"
             >
-              <img
-                src={selectedCert}
-                alt={activeCert.title}
-                className="max-w-full max-h-[85vh] object-contain"
-              />
-              
-              {/* Optional: Caption at the bottom */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 to-transparent p-6 text-center">
-                <h3 className="text-xl font-bold text-white mb-1">{activeCert.title}</h3>
-                <p className="text-white/80 text-sm">{activeCert.issuer} — {activeCert.date}</p>
+              {/* Modal Window Bar */}
+              <div className="bg-[#0A0F1D] px-4 py-3 border-b border-[#1E293B] flex items-center justify-between gap-2">
+                <div className="text-xs text-[#E2E8F0] font-bold truncate min-w-0 pr-2">
+                  display --cert &quot;{activeCert.title}&quot;
+                </div>
+                <button
+                  onClick={() => setSelectedCert(null)}
+                  className="p-1 rounded text-[#94A3B8] hover:text-white hover:bg-[#1E293B] transition-colors cursor-pointer shrink-0"
+                  aria-label="Close Preview"
+                >
+                  <FiX className="w-5 h-5" />
+                </button>
+              </div>
+
+              <div className="p-4 bg-[#050811] flex items-center justify-center max-h-[75vh] overflow-hidden">
+                <div className="relative w-full h-[60vh]">
+                  <Image
+                    src={selectedCert}
+                    alt={activeCert.title}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+
+              <div className="p-3 bg-[#0B0F19] border-t border-[#1E293B] text-xs text-[#94A3B8] flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span>ISSUED_BY: <strong className="text-white">{activeCert.issuer}</strong></span>
+                  {activeCert.verifyUrl && (
+                    <a
+                      href={activeCert.verifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:underline flex items-center gap-1 font-bold"
+                    >
+                      <FiExternalLink className="w-3.5 h-3.5" />
+                      <span>Verify Credential</span>
+                    </a>
+                  )}
+                </div>
+                <span>ESC to close</span>
               </div>
             </motion.div>
           </motion.div>

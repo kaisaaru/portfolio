@@ -1,191 +1,49 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FiGithub, FiExternalLink, FiChevronDown } from "react-icons/fi";
-import ImageCarousel from "./ImageCarousel";
+import { motion } from "framer-motion";
+import { FiGitBranch, FiTerminal } from "react-icons/fi";
 import { projects } from "@/data/projects";
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
-  },
-};
-
-const item = {
-  hidden: { opacity: 0, y: 40 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
+import IdeWorkstationView from "./projects/IdeWorkstationView";
 
 export default function Projects() {
-  const [expanded, setExpanded] = useState<string | null>(null);
-
-  const toggle = (title: string) => {
-    setExpanded(expanded === title ? null : title);
-  };
-
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="projects" className="py-24 px-4 sm:px-6 font-mono relative">
+      <div className="max-w-6xl mx-auto space-y-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-[#1E293B] pb-4 gap-2"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Featured{" "}
-            <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-              Projects
+          <div>
+            <div className="text-xs text-primary flex items-center gap-1.5 mb-1.5 font-bold tracking-wider">
+              <FiGitBranch className="w-3.5 h-3.5" />
+              <span>VCS_LOG // SHIPPED REPOSITORIES</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
+              git log --featured-projects
+            </h2>
+          </div>
+          <div className="flex items-center gap-3 text-xs text-[#64748B]">
+            <span className="flex items-center gap-1.5 text-primary">
+              <FiTerminal className="w-3 h-3" />
+              <span>CYBER_IDE WORKSTATION</span>
             </span>
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-secondary rounded-full mx-auto mb-4" />
-          <p className="text-muted max-w-lg mx-auto">
-            A selection of projects that showcase my skills and experience.
-          </p>
+            <span>·</span>
+            <span>{projects.length} REPOSITORIES SYNCED</span>
+          </div>
         </motion.div>
 
-        {/* Projects */}
+        {/* Dedicated Cyber IDE Workstation */}
         <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true, margin: "-100px" }}
-          className="columns-1 md:columns-2 gap-6 space-y-6"
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
         >
-          {projects.map((project) => {
-            const isOpen = expanded === project.title;
-
-            return (
-              <motion.div
-                key={project.title}
-                variants={item}
-                className="group relative rounded-2xl bg-surface border border-border hover:border-primary/50 p-6 transition-all duration-300 break-inside-avoid inline-block w-full"
-              >
-                {/* Gradient border effect on hover */}
-                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 to-secondary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
-
-                {/* Screenshot Carousel */}
-                {project.images && project.images.length > 0 && (
-                  <ImageCarousel images={project.images} />
-                )}
-
-                {/* Project header */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className="p-3 rounded-xl bg-primary/10">
-                    <svg
-                      className="w-6 h-6 text-primary"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={1.5}
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M2.25 12.75V12A2.25 2.25 0 014.5 9.75h15A2.25 2.25 0 0121.75 12v.75m-8.69-6.44l-2.12-2.12a1.5 1.5 0 00-1.061-.44H4.5A2.25 2.25 0 002.25 6v12a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9a2.25 2.25 0 00-2.25-2.25h-5.379a1.5 1.5 0 01-1.06-.44z"
-                      />
-                    </svg>
-                  </div>
-                  <div className="flex gap-3">
-                    <div className="relative group/tooltip">
-                      <div className="text-muted cursor-not-allowed flex items-center justify-center p-1">
-                        <FiGithub className="w-5 h-5 opacity-50" />
-                      </div>
-                      
-                      {/* Tooltip */}
-                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-surface-light border border-border text-foreground text-xs font-medium rounded-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 whitespace-nowrap shadow-xl z-20">
-                        Private Repository
-                        {/* Tooltip Arrow */}
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-light border-b border-r border-border rotate-45" />
-                      </div>
-                    </div>
-                    <div className="relative group/tooltip">
-                      <div className="text-muted cursor-not-allowed flex items-center justify-center p-1">
-                        <FiExternalLink className="w-5 h-5 opacity-50" />
-                      </div>
-                      
-                      {/* Tooltip */}
-                      <div className="absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1.5 bg-surface-light border border-border text-foreground text-xs font-medium rounded-lg opacity-0 invisible group-hover/tooltip:opacity-100 group-hover/tooltip:visible transition-all duration-200 whitespace-nowrap shadow-xl z-20">
-                        Coming Soon
-                        {/* Tooltip Arrow */}
-                        <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-surface-light border-b border-r border-border rotate-45" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Title & Description */}
-                <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors duration-200">
-                  {project.title}
-                </h3>
-                <p className="text-muted text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
-
-                {/* Tech Stack Tags (always visible) */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((t) => (
-                    <span
-                      key={t}
-                      className="px-3 py-1 text-xs font-medium rounded-full bg-primary/10 text-primary border border-primary/20"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Expand/Collapse toggle */}
-                {project.features && (
-                  <div className="pt-4 mt-4 border-t border-border/50">
-                    <button
-                      onClick={() => toggle(project.title)}
-                      className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary-light transition-colors duration-200 cursor-pointer"
-                    >
-                      <span>{isOpen ? "Hide Details" : "View Details"}</span>
-                      <motion.span
-                        animate={{ rotate: isOpen ? 180 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      >
-                        <FiChevronDown className="w-4 h-4" />
-                      </motion.span>
-                    </button>
-
-                    {/* Collapsible features */}
-                    <AnimatePresence>
-                      {isOpen && (
-                        <motion.div
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <ul className="mt-4 pt-4 border-t border-border space-y-2">
-                            {project.features.map((feature) => (
-                              <li
-                                key={feature}
-                                className="flex items-start gap-2 text-sm text-muted"
-                              >
-                                <span className="text-primary mt-0.5 shrink-0">
-                                  ✦
-                                </span>
-                                {feature}
-                              </li>
-                            ))}
-                          </ul>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                )}
-              </motion.div>
-            );
-          })}
+          <IdeWorkstationView projects={projects} />
         </motion.div>
       </div>
     </section>

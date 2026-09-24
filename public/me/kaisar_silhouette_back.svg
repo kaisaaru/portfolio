@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 650" width="100%" height="100%">
+  <defs>
+    <!-- Cyan Neon Rim Glow Filter -->
+    <filter id="neon-glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="8" result="blur1" />
+      <feGaussianBlur stdDeviation="18" result="blur2" />
+      <feMerge>
+        <feMergeNode in="blur2" />
+        <feMergeNode in="blur1" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+    <linearGradient id="rim-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.9" />
+      <stop offset="50%" stop-color="#0284C7" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#38BDF8" stop-opacity="0.95" />
+    </linearGradient>
+
+    <linearGradient id="body-grad" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#050B18" />
+      <stop offset="60%" stop-color="#020612" />
+      <stop offset="100%" stop-color="#010308" />
+    </linearGradient>
+  </defs>
+
+  <!-- Silhouette Body (Back View) -->
+  <g>
+    <!-- Shoulders & Torso with Jacket Collar -->
+    <path
+      d="M 120 650 
+         C 120 520, 140 420, 175 360 
+         C 190 335, 205 320, 215 310
+         C 215 310, 210 270, 215 250
+         C 225 252, 275 252, 285 250
+         C 290 270, 285 310, 285 310
+         C 295 320, 310 335, 325 360
+         C 360 420, 380 520, 380 650
+         Z"
+      fill="url(#body-grad)"
+      stroke="url(#rim-grad)"
+      stroke-width="3"
+      filter="url(#neon-glow)"
+    />
+
+    <!-- Jacket Collar Back Fold -->
+    <path
+      d="M 195 330 Q 250 355 305 330 L 295 310 Q 250 325 205 310 Z"
+      fill="#0A1424"
+      stroke="#38BDF8"
+      stroke-width="1.5"
+      stroke-opacity="0.7"
+    />
+
+    <!-- Neck Back -->
+    <path
+      d="M 220 280 L 220 220 Q 250 225 280 220 L 280 280 Z"
+      fill="#030814"
+      stroke="#38BDF8"
+      stroke-width="2"
+      filter="url(#neon-glow)"
+    />
+
+    <!-- Head & Hair Silhouette (Back of Head) -->
+    <path
+      d="M 215 220
+         C 185 205, 180 155, 195 120
+         C 190 105, 198 85, 210 75
+         C 205 60, 220 48, 238 45
+         C 255 42, 270 48, 280 55
+         C 295 48, 312 60, 312 75
+         C 325 90, 328 115, 320 135
+         C 335 165, 325 205, 285 220
+         Q 250 235 215 220 Z"
+      fill="url(#body-grad)"
+      stroke="url(#rim-grad)"
+      stroke-width="3.5"
+      filter="url(#neon-glow)"
+    />
+
+    <!-- Hair Strands & Highlights for Anime Silhouette Depth -->
+    <path
+      d="M 205 110 Q 230 130 240 160"
+      fill="none"
+      stroke="#38BDF8"
+      stroke-width="1.5"
+      stroke-opacity="0.5"
+    />
+    <path
+      d="M 295 105 Q 275 130 265 160"
+      fill="none"
+      stroke="#38BDF8"
+      stroke-width="1.5"
+      stroke-opacity="0.5"
+    />
+    <path
+      d="M 235 60 Q 248 85 252 110"
+      fill="none"
+      stroke="#38BDF8"
+      stroke-width="1.5"
+      stroke-opacity="0.6"
+    />
+
+    <!-- Cyber Wireframe Accents across silhouette -->
+    <path
+      d="M 175 420 L 325 420"
+      stroke="#38BDF8"
+      stroke-width="1"
+      stroke-dasharray="4 6"
+      stroke-opacity="0.4"
+    />
+    <path
+      d="M 155 500 L 345 500"
+      stroke="#38BDF8"
+      stroke-width="1"
+      stroke-dasharray="6 8"
+      stroke-opacity="0.3"
+    />
+  </g>
+</svg>

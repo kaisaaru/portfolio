@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 125" width="100%" height="125" role="img" aria-label="Making Isla Real - #2030IslaNyata">
+  <title>Making Isla Real - #2030IslaNyata</title>
+  <defs>
+    <!-- Background Gradient (Same as Header) -->
+    <linearGradient id="quoteBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#080B12" />
+      <stop offset="50%" stop-color="#0B0F19" />
+      <stop offset="100%" stop-color="#080B12" />
+    </linearGradient>
+
+    <!-- Top Hairline Accent -->
+    <linearGradient id="topHairline" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#1E293B" stop-opacity="0.3" />
+      <stop offset="50%" stop-color="#38BDF8" stop-opacity="0.6" />
+      <stop offset="100%" stop-color="#1E293B" stop-opacity="0.3" />
+    </linearGradient>
+
+    <!-- Very Subtle Grid -->
+    <pattern id="qGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#60A5FA" stroke-width="1" stroke-opacity="0.02" />
+    </pattern>
+  </defs>
+
+  <style>
+    .mono { font-family: 'SFMono-Regular', 'JetBrains Mono', Consolas, 'Fira Code', monospace; }
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif; }
+
+    /* Blinking Cursor */
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+    .cursor { animation: cursorBlink 1s infinite; }
+  </style>
+
+  <!-- Container Box -->
+  <rect x="1" y="1" width="1198" height="123" rx="12" fill="url(#quoteBg)" stroke="#1E293B" stroke-width="1" />
+  <rect x="1" y="1" width="1198" height="123" rx="12" fill="url(#qGrid)" />
+
+  <!-- Top Hairline Divider -->
+  <line x1="80" y1="1" x2="1120" y2="1" stroke="url(#topHairline)" stroke-width="1.5" />
+
+  <!-- Terminal Style Quote Output -->
+  <g transform="translate(600, 52)">
+    <!-- Main Quote: Pure White, Clean, Editorial -->
+    <text x="0" y="0" text-anchor="middle" fill="#FFFFFF" class="sans" font-size="24" font-weight="700" letter-spacing="-0.3">
+      “ Making Isla Real. ”<tspan fill="#38BDF8" class="mono cursor" font-weight="400">_</tspan>
+    </text>
+
+    <!-- Subtitle: Subtle & Technical -->
+    <text x="0" y="32" text-anchor="middle" fill="#94A3B8" class="mono" font-size="12" font-weight="500">
+      <tspan fill="#38BDF8" font-weight="600">#2030IslaNyata</tspan> <tspan fill="#334155">·</tspan> <tspan fill="#64748B">One idea, one project, and one step at a time.</tspan>
+    </text>
+  </g>
+</svg>

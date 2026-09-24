@@ -42,3 +42,10 @@ next-env.d.ts
 
 # agent
 .agents/
+
+# private / local reference assets (heavy media, draft videos)
+/private/
+*.mp4
+*.mp3
+*.mov
+*.avi
